@@ -1,0 +1,129 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-15T05:00:00Z"
+  },
+  "title": "해빛한방병원 한방피부클리닉 (habit Skin Lab) 홈페이지",
+  "launch": {
+    "view": "focused",
+    "file": "Main.dc.html"
+  },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 8900,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 메인"
+    },
+    "Sk-About.dc.html": {
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 4900,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 소개"
+    },
+    "Sk-Event.dc.html": {
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 2850,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 이벤트·혜택"
+    },
+    "Sk-Toning.dc.html": {
+      "x": 4680,
+      "y": 0,
+      "w": 1440,
+      "h": 5600,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 토닝·색소"
+    },
+    "Sk-Booster.dc.html": {
+      "x": 6240,
+      "y": 0,
+      "w": 1440,
+      "h": 5050,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 스킨부스터"
+    },
+    "Sk-Scar.dc.html": {
+      "x": 7800,
+      "y": 0,
+      "w": 1440,
+      "h": 5550,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 흉터·모공·점"
+    },
+    "Sk-Hair.dc.html": {
+      "x": 9360,
+      "y": 0,
+      "w": 1440,
+      "h": 5000,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 제모"
+    },
+    "Sk-Hanbang.dc.html": {
+      "x": 10920,
+      "y": 0,
+      "w": 1440,
+      "h": 5500,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 한방피부"
+    },
+    "Sk-Acne.dc.html": {
+      "x": 12480,
+      "y": 0,
+      "w": 1440,
+      "h": 5600,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 여드름·재생관리"
+    },
+    "Sk-Column.dc.html": {
+      "x": 14040,
+      "y": 0,
+      "w": 1440,
+      "h": 3700,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 원장 칼럼"
+    },
+    "Sk-Cases.dc.html": {
+      "x": 15600,
+      "y": 0,
+      "w": 1440,
+      "h": 2600,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "한방피부클리닉 · 시술사례"
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Sk-About.dc.html",
+    "Sk-Event.dc.html",
+    "Sk-Toning.dc.html",
+    "Sk-Booster.dc.html",
+    "Sk-Scar.dc.html",
+    "Sk-Hair.dc.html",
+    "Sk-Hanbang.dc.html",
+    "Sk-Acne.dc.html",
+    "Sk-Column.dc.html",
+    "Sk-Cases.dc.html"
+  ],
+  "notes": {},
+  "designSystems": []
+}

@@ -1,0 +1,10 @@
+{
+  "name": "habit-skinlab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:prod": "node build.mjs --prod",
+    "dev": "node build.mjs && node serve.mjs"
+  }
+}

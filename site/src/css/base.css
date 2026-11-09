@@ -1,0 +1,67 @@
+/* ==========================================================
+   habit Skin Lab — site.css
+   빌드 시 base.css + components.css + layout.css 순으로 합쳐집니다.
+   ========================================================== */
+:root{
+  --bg:#F3F4F3; --surface:#FFFFFF; --fg:#1F2523; --muted:#647069; --border:#DFE4E1;
+  --ui:#3E7A6B; --ui-hover:#2F6558; --on-ui:#FFFFFF; --soft:#E5F0EC; --deep:#2B3331;
+  --ivory:#F4EFE4; --ivory-2:#FAF6EC; --hero-fg:#2C4A43; --hero-muted:#46605A;
+  --ph1:#E3EAE6; --ph2:#EEF2EF; --shadow:rgba(31,37,35,.10);
+  --font:'Noto Sans KR',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --hd-h:76px; --ease:cubic-bezier(.22,.61,.36,1);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101413; --surface:#181D1B; --fg:#EDF2EF; --muted:#A3B0AA; --border:#2B3431;
+    --ui:#7FBBA9; --ui-hover:#9ACDBD; --on-ui:#0C1A15; --soft:#1E2E29; --deep:#0E1211;
+    --ivory:#1B1F1C; --ivory-2:#20251F; --hero-fg:#EDF2EF; --hero-muted:#B9C6C0;
+    --ph1:#202826; --ph2:#1A211F; --shadow:rgba(0,0,0,.5); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101413; --surface:#181D1B; --fg:#EDF2EF; --muted:#A3B0AA; --border:#2B3431;
+  --ui:#7FBBA9; --ui-hover:#9ACDBD; --on-ui:#0C1A15; --soft:#1E2E29; --deep:#0E1211;
+  --ivory:#1B1F1C; --ivory-2:#20251F; --hero-fg:#EDF2EF; --hero-muted:#B9C6C0;
+  --ph1:#202826; --ph2:#1A211F; --shadow:rgba(0,0,0,.5); color-scheme:dark;
+}
+*{box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased; scroll-behavior:smooth; scroll-padding-top:calc(var(--hd-h) + 12px);}
+body{word-break:keep-all; overflow-wrap:break-word; margin:0; background:var(--surface); color:var(--fg); font-family:var(--font); font-size:16px; line-height:1.6; letter-spacing:-0.01em;}
+a{color:inherit; text-decoration:none;} p{margin:0; text-wrap:pretty;} h1,h2,h3{margin:0; text-wrap:balance; letter-spacing:-0.03em; line-height:1.25;}
+img,video{max-width:100%; display:block;}
+:focus-visible{outline:2px solid var(--ui); outline-offset:3px;}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+.skip{position:absolute; left:12px; top:-60px; z-index:200; background:var(--ui); color:var(--on-ui); padding:10px 16px; border-radius:8px;}
+.skip:focus{top:12px;}
+.w{max-width:1200px; margin:0 auto; padding-inline:24px;}
+.w-wide{max-width:1440px; margin:0 auto; padding-inline:24px;}
+.sec{padding-block:96px;} .alt{background:var(--bg);}
+.eb{font-size:13px; font-weight:600; letter-spacing:.22em; color:var(--ui); text-transform:uppercase; text-align:center;}
+.eb.gray{color:var(--muted);} .eb.l{text-align:left;}
+.h2{font-size:38px; font-weight:700; text-align:center; margin-top:10px;}
+.h2.l{text-align:left;}
+.lead{font-size:17px; color:var(--muted); text-align:center; max-width:640px; margin:14px auto 0; line-height:1.75;}
+.lead.l{text-align:left; margin-inline:0;}
+
+/* 사진·영상 자리 표시 (실제 파일로 교체) */
+.ph{background:repeating-linear-gradient(45deg,var(--ph1),var(--ph1) 12px,var(--ph2) 12px,var(--ph2) 24px); border:1px dashed color-mix(in srgb,var(--muted) 60%,transparent); color:var(--muted); display:flex; align-items:center; justify-content:center; text-align:center; font-size:13px; font-weight:600; line-height:1.5; padding:10px; width:100%;}
+.ph small{display:block; font-weight:400; opacity:.85;}
+.tbd{display:inline-block; border:1px dashed #C9873F; color:var(--fg); background:color-mix(in srgb,#E7B061 18%,transparent); border-radius:6px; padding:1px 8px; font-size:12.5px; font-weight:500; margin-inline:2px;}
+
+/* 미디어 슬롯: .media 안에 <picture>/<video> 또는 .ph 를 넣으면 꽉 채움 */
+.media{position:relative; overflow:hidden; background:var(--ph1);}
+.media > img,.media > picture,.media > picture img,.media > video,.media > .ph{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+.media > .ph{border:0;}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 28px; border-radius:999px; font-size:15.5px; font-weight:600; transition:background .2s, color .2s, transform .15s, border-color .2s; border:1px solid transparent; cursor:pointer;}
+.btn:active{transform:scale(.96);}
+.btn.solid{background:var(--ui); color:var(--on-ui);} .btn.solid:hover{background:var(--ui-hover);}
+.btn.ln{border-color:var(--ui); color:var(--ui);} .btn.ln:hover{background:var(--soft);}
+.btn.glass{background:rgba(255,255,255,.6); border-color:color-mix(in srgb,var(--ui) 60%,transparent); color:var(--ui-hover); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);}
+.btn.glass:hover{background:rgba(255,255,255,.85);}
+.btn.white{background:#fff; color:#2F6558;} .btn.line{border-color:rgba(255,255,255,.75); color:#fff;} .btn.line:hover{background:rgba(255,255,255,.14);}
+.btn.blk{background:var(--deep); color:#fff; border-radius:4px; padding:11px 18px; font-size:14px;} .btn.blk:hover{background:#000;}
+.btn.kakao{background:#FEE500; color:#2B2B2B;}
+.btn.naver{background:#03C75A; color:#fff;}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://skinlab.example.com/sitemap.xml

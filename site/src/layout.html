@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{pageTitle}}</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="{{canonical}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{cfg.siteName}}">
+<meta property="og:title" content="{{pageTitle}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#F4EFE4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add('js');</script>
+<script>
+/* 메뉴 이동 전환: 누른 고민 타일 사진이 다음 페이지 큰 이미지로 이어지게 이름을 붙임 (View Transitions 지원 브라우저만) */
+(function(){
+  var NAME='hero-media';
+  function tileFor(url){ try{ var p=new URL(url).pathname.split('/').pop(); return p ? document.querySelector('.cn a[href="'+p+'"] .media') : null; }catch(e){ return null; } }
+  function inView(el){ var r=el.getBoundingClientRect(); return r.bottom>0 && r.top<innerHeight; }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('.cn a'); if(!a) return;
+    var m=a.querySelector('.media'); if(m) m.style.viewTransitionName=NAME;
+  });
+  addEventListener('pageshow',function(){ document.querySelectorAll('.cn .media').forEach(function(m){ m.style.viewTransitionName=''; }); });
+  addEventListener('pagereveal',function(e){
+    if(!e.viewTransition || !window.navigation || !navigation.activation || !navigation.activation.from) return;
+    var m=tileFor(navigation.activation.from.url);
+    if(m && inView(m)){ m.style.viewTransitionName=NAME; e.viewTransition.finished.finally(function(){ m.style.viewTransitionName=''; }); }
+  });
+})();
+</script>
+<script type="application/ld+json">{{jsonld}}</script>
+</head>
+<body class="{{bodyClass}}">
+<a class="skip" href="#main">본문 바로가기</a>
+{{devbar}}
+{{> header}}
+<main id="main">
+{{content}}
+{{> map}}
+</main>
+{{> footer}}
+{{> floating}}
+{{popups}}
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

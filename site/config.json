@@ -1,0 +1,23 @@
+{
+  "_comment": "사이트 전체에서 쓰는 값. 'TODO'는 확인 필요 항목입니다. 값이 '#'이면 링크가 비어 있는 상태입니다.",
+  "siteUrl": "https://skinlab.example.com",
+  "siteName": "habit Skin Lab",
+  "hospitalName": "해빛한방병원",
+  "hospitalUrl": "#",
+  "naverBookingUrl": "#",
+  "naverTalkUrl": "#",
+  "kakaoChannelUrl": "#",
+  "naverMapUrl": "#",
+  "instagramId": "habit_skinlab",
+  "instagramUrl": "https://www.instagram.com/habithospital",
+  "blogUrl": "https://blog.naver.com/habit-hospital",
+  "youtubeUrl": "https://www.youtube.com/@habithospital",
+  "tel": "063-715-5119",
+  "telRaw": "0637155119",
+  "fax": "063-715-5120",
+  "ward": "063-715-6400",
+  "bizNo": "111-93-95279",
+  "ceo": "최규현",
+  "address": "전북특별자치도 전주시 덕진구 사근1길 10 현대메디컬시티",
+  "year": "2026"
+}

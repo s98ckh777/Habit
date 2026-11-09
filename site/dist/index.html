@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>habit Skin Lab | 해빛한방병원 한방피부클리닉 · 전주</title>
+<meta name="description" content="전주 해빛한방병원 한방피부클리닉 habit Skin Lab. 피부 진단과 한방 체질 문진으로 시작해 레이저·스킨부스터·약침 시술, 시술 뒤 재생관리까지 내 피부에 맞는 순서를 함께 찾아드립니다.">
+<link rel="canonical" href="https://skinlab.example.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="habit Skin Lab">
+<meta property="og:title" content="habit Skin Lab | 해빛한방병원 한방피부클리닉 · 전주">
+<meta property="og:description" content="전주 해빛한방병원 한방피부클리닉 habit Skin Lab. 피부 진단과 한방 체질 문진으로 시작해 레이저·스킨부스터·약침 시술, 시술 뒤 재생관리까지 내 피부에 맞는 순서를 함께 찾아드립니다.">
+<meta property="og:url" content="https://skinlab.example.com/">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#F4EFE4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add('js');</script>
+<script>
+/* 메뉴 이동 전환: 누른 고민 타일 사진이 다음 페이지 큰 이미지로 이어지게 이름을 붙임 (View Transitions 지원 브라우저만) */
+(function(){
+  var NAME='hero-media';
+  function tileFor(url){ try{ var p=new URL(url).pathname.split('/').pop(); return p ? document.querySelector('.cn a[href="'+p+'"] .media') : null; }catch(e){ return null; } }
+  function inView(el){ var r=el.getBoundingClientRect(); return r.bottom>0 && r.top<innerHeight; }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('.cn a'); if(!a) return;
+    var m=a.querySelector('.media'); if(m) m.style.viewTransitionName=NAME;
+  });
+  addEventListener('pageshow',function(){ document.querySelectorAll('.cn .media').forEach(function(m){ m.style.viewTransitionName=''; }); });
+  addEventListener('pagereveal',function(e){
+    if(!e.viewTransition || !window.navigation || !navigation.activation || !navigation.activation.from) return;
+    var m=tileFor(navigation.activation.from.url);
+    if(m && inView(m)){ m.style.viewTransitionName=NAME; e.viewTransition.finished.finally(function(){ m.style.viewTransitionName=''; }); }
+  });
+})();
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalClinic","@id":"https://skinlab.example.com/#clinic","name":"해빛한방병원 한방피부클리닉 habit Skin Lab","url":"https://skinlab.example.com/","telephone":"+82-63-715-5119","address":{"@type":"PostalAddress","streetAddress":"사근1길 10 현대메디컬시티","addressLocality":"전주시 덕진구","addressRegion":"전북특별자치도","addressCountry":"KR"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"21:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday"],"opens":"09:00","closes":"16:00"}],"parentOrganization":{"@type":"Hospital","name":"해빛한방병원"},"sameAs":["https://blog.naver.com/habit-hospital","https://www.youtube.com/@habithospital","https://www.instagram.com/habithospital"]}</script>
+</head>
+<body class="has-hero has-devbar">
+<a class="skip" href="#main">본문 바로가기</a>
+<div class="devbar">시안 빌드<span class="t"> · 접속 팝업은 각각 닫거나 "1일 동안 보지 않기"로 숨길 수 있어요.</span><button type="button" id="pop-again">팝업 다시 보기</button></div>
+<header class="hd" id="hd">
+<div class="hd-in">
+<a class="logo" href="index.html" aria-label="habit Skin Lab 홈"><span class="logo-t"><b>habit</b> Skin Lab</span><span class="logo-s">해빛한방병원 한방피부클리닉</span></a>
+<nav class="gnb" aria-label="주 메뉴">
+<a href="about.html" data-nav="about" aria-label="HABIT 소개">HABIT</a>
+<div class="dd" data-navgroup="treat"><button type="button" aria-haspopup="true">시술 안내</button>
+<div class="dd-p">
+<a href="toning.html" data-nav="toning">토닝·색소 <small>Toning</small></a>
+<a href="booster.html" data-nav="booster">스킨부스터 <small>Booster</small></a>
+<a href="scar.html" data-nav="scar">흉터·모공·점 <small>Scar</small></a>
+<a href="hair.html" data-nav="hair">제모 <small>Hair</small></a>
+<a href="hanbang.html" data-nav="hanbang">한방피부 <small>Hanbang</small></a>
+<a href="acne.html" data-nav="acne">여드름·재생관리 <small>Acne</small></a>
+</div></div>
+<a href="event.html" data-nav="event">이벤트·혜택</a>
+<a href="column.html" data-nav="column">원장 칼럼</a>
+<a href="cases.html" data-nav="cases">시술사례</a>
+</nav>
+<div class="hd-r">
+<a class="to-h" href="#">해빛한방병원 ↗</a>
+<a class="btn solid" href="index.html#consult">상담 예약</a>
+<button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mm"><span></span></button>
+</div>
+</div>
+</header>
+<nav class="mm" id="mm" aria-label="모바일 메뉴">
+<a href="about.html" data-nav="about" aria-label="HABIT 소개">HABIT</a>
+<div class="grp">시술 안내</div>
+<div class="sub">
+<a href="toning.html" data-nav="toning">토닝·색소</a>
+<a href="booster.html" data-nav="booster">스킨부스터</a>
+<a href="scar.html" data-nav="scar">흉터·모공·점</a>
+<a href="hair.html" data-nav="hair">제모</a>
+<a href="hanbang.html" data-nav="hanbang">한방피부</a>
+<a href="acne.html" data-nav="acne">여드름·재생관리</a>
+</div>
+<div class="grp">소식</div>
+<a href="event.html" data-nav="event">이벤트·혜택</a>
+<a href="column.html" data-nav="column">원장 칼럼</a>
+<a href="cases.html" data-nav="cases">시술사례</a>
+<a href="#">해빛한방병원 홈페이지 ↗</a>
+<div class="mm-cta"><a class="btn ln" href="tel:0637155119">전화 상담</a><a class="btn solid" href="#">네이버 예약</a></div>
+</nav>
+<main id="main">
+<!-- ===== HERO ===== -->
+<section class="hero" aria-labelledby="hero-t">
+<!--
+  히어로 영상: 1280×720 · 8초 무음 루프 · mp4 1.3MB. 포스터는 첫 프레임(webp).
+  모델이 영상 가운데보다 약간 왼쪽에 있어서, 화면 오른쪽 패널에 넣고 object-position 으로 얼굴을 맞춥니다 (layout.css .hero-media).
+  더 큰 원본(1920×1080)이나 webm 이 생기면 <source> 를 추가하세요. webm 을 쓸 때는 mp4 보다 위에 둡니다.
+-->
+<div class="hero-media media">
+<video id="hero-video" data-bg autoplay muted loop playsinline preload="auto" poster="assets/img/hero-poster.webp" aria-hidden="true">
+<source src="assets/video/hero.mp4" type="video/mp4">
+</video>
+</div>
+<div class="hero-in">
+<div class="eb up">habit makes you</div>
+<h1 id="hero-t" class="up d1">당신이 더 건강하고<br><b>더 아름다울 수 있도록</b></h1>
+<p class="clinic up d1">해빛한방병원 한방피부클리닉</p>
+<p class="up d2">내 고민과 내 피부에 부합하는 맞춤 솔루션을 찾아드립니다.</p>
+<div class="btns up d3"><a class="btn solid" href="#consult">상담 예약하기</a><a class="btn glass" href="#program">프로그램 보기</a></div>
+</div>
+<div class="hero-foot">
+<span class="scroll-cue"><i></i>Scroll</span>
+<span class="model-note">모델 영상은 연출된 장면이며 실제 시술 결과가 아닙니다.</span>
+<button class="vid-tg" type="button" data-video-toggle="hero-video">❚❚ 영상 정지</button>
+</div>
+</section>
+
+<!-- ===== STATEMENT ===== -->
+<section class="sec"><div class="w st">
+<div class="rv">
+<div class="eb l">About habit Skin Lab</div>
+<h2 style="margin-top:14px;">해빛한방병원 피부클리닉<br><b>건강과 회복력</b>에 기반한<br>아름다움을 기획합니다</h2>
+<p>원장님의 개별문진과 정밀 피부진단기기 사용,<br>정확한 진단 이후 섬세한 시술로<br>건강하고 빛나는 피부를 만듭니다.</p>
+<p class="st-key">피부 탄력과 수분은 높게<br>피부 나이는 낮게</p>
+<a class="more" href="about.html">스킨랩 소개 보기</a>
+</div>
+<div class="st-media rv d1">
+<div class="media"><img src="assets/img/skin-hero.jpg" alt="해빛한방병원 접수 데스크" width="1200" height="1500" loading="lazy" decoding="async"></div>
+<div class="media"><img src="assets/img/consult-sq.webp" alt="상담실에서 피부 상태를 함께 보며 상담하는 모습" width="800" height="800" loading="lazy" decoding="async"></div>
+<p class="cap">해빛한방병원 접수 데스크 · 상담실 (연출 사진)</p>
+</div>
+</div></section>
+
+<!-- ===== CONCERN TILES ===== -->
+<section class="sec alt"><div class="w">
+<div class="eb rv">Find your care</div>
+<h2 class="h2 rv d1">고민으로 찾아보세요</h2>
+<p class="lead rv d2">지금 가장 신경 쓰이는 고민을 골라 보세요. 자세한 방법과 횟수는 진단과 상담 뒤에 안내드립니다.</p>
+<div class="cn">
+<a class="rv c-toning" href="toning.html"><div class="media"><div class="ph"><span>모델 얼굴 클로즈업 · 맑은 톤<small>4:5</small></span></div></div><div class="tx"><small>TONING · PIGMENT</small><h3>토닝·색소</h3><p>칙칙한 톤, 기미·잡티·주근깨</p><span class="go">자세히 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a>
+<a class="rv d1 c-booster" href="booster.html"><div class="media"><div class="ph"><span>모델 얼굴 · 촉촉한 피부결<small>4:5</small></span></div></div><div class="tx"><small>SKIN BOOSTER</small><h3>스킨부스터</h3><p>건조하고 윤기 없는 피부</p><span class="go">자세히 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a>
+<a class="rv d2 c-scar" href="scar.html"><div class="media"><div class="ph"><span>CO₂ StraTek 시술 장면<small>4:5</small></span></div></div><div class="tx"><small>SCAR · PORE · MOLE</small><h3>흉터·모공·점</h3><p>여드름 흉터, 넓은 모공, 점·비립종</p><span class="go">자세히 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a>
+<a class="rv c-hair" href="hair.html"><div class="media"><div class="ph"><span>모델 · 팔/겨드랑이 라인<small>4:5</small></span></div></div><div class="tx"><small>HAIR REMOVAL</small><h3>제모</h3><p>수염·겨드랑이·인중</p><span class="go">자세히 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a>
+<a class="rv d1 c-hanbang" href="hanbang.html"><div class="media"><div class="ph"><span>약침·한방 재료 연출 컷<small>4:5</small></span></div></div><div class="tx"><small>HANBANG SKIN</small><h3>한방피부</h3><p>약침, 몸 안쪽 균형까지 함께</p><span class="go">자세히 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a>
+<a class="rv d2 c-acne" href="acne.html"><div class="media"><div class="ph"><span>Derma-S Ultra 진정 관리 장면<small>4:5</small></span></div></div><div class="tx"><small>ACNE · RECOVERY</small><h3>여드름·재생관리</h3><p>반복되는 트러블, 시술 후 진정</p><span class="go">자세히 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a>
+</div>
+</div></section>
+
+<!-- ===== SIGNATURE PROGRAMS ===== -->
+<section id="program" class="sec"><div class="w">
+<div class="eb rv">Signature Program</div>
+<h2 class="h2 rv d1">해빛스킨랩의 시그니처 프로그램</h2>
+<p class="lead rv d2">프로그램 비용은 피부 상태를 확인한 뒤 상담에서 안내드립니다. <span class="tbd">확인 필요 · 장비 사진 촬영 후 교체</span></p>
+<div class="chips" data-filter=".pg .pc" role="group" aria-label="프로그램 분류">
+<button type="button" data-cat="all" aria-pressed="true">전체</button><button type="button" data-cat="toning" aria-pressed="false">토닝·색소</button><button type="button" data-cat="scar" aria-pressed="false">흉터·모공·점</button><button type="button" data-cat="hair" aria-pressed="false">제모</button><button type="button" data-cat="booster" aria-pressed="false">스킨부스터</button><button type="button" data-cat="acne" aria-pressed="false">여드름·한방</button><button type="button" data-cat="first" aria-pressed="false">첫 방문</button>
+</div>
+<div class="pg">
+<a class="pc" data-cat="toning" href="toning.html"><div class="media"><img src="assets/img/pc-hollywood.webp" alt="할리우드 스펙트라 장비" width="960" height="1200" loading="lazy" decoding="async"></div><div class="bd"><h3>할리우드 레이저토닝</h3><p class="rec">추천 · 피부 톤과 결이 신경 쓰이는 분</p><div class="tags"><span class="tag">Hollywood Spectra</span><span class="tag g">재생관리 포함</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="toning" href="toning.html"><div class="media"><div class="ph"><span>모델 얼굴<small>4:5</small></span></div></div><div class="bd"><h3>할리우드 카본필</h3><p class="rec">추천 · 모공과 피부 결, 칙칙한 톤이 고민인 분</p><div class="tags"><span class="tag">Hollywood Spectra</span><span class="tag g">재생관리 포함</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="toning" href="toning.html"><div class="media"><div class="ph"><span>시술 장면<small>4:5</small></span></div></div><div class="bd"><h3>주근깨·검버섯 색소</h3><p class="rec">추천 · 또렷한 색소 때문에 화장으로 가리게 되는 분</p><div class="tags"><span class="tag">Clarity II</span><span class="tag g">재생관리 포함</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="toning" href="toning.html"><div class="media"><img src="assets/img/pc-clarity-hp.webp" alt="클래리티 2 핸드피스" width="329" height="411" loading="lazy" decoding="async"></div><div class="bd"><h3>홍조·혈관</h3><p class="rec">추천 · 얼굴 붉은기가 신경 쓰이는 분</p><div class="tags"><span class="tag">Clarity II</span><span class="tag g">적응증 상담 후 진행</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="hair" href="hair.html"><div class="media"><img src="assets/img/pc-male.webp" alt="남성 모델 (연출 사진)" width="860" height="1075" loading="lazy" decoding="async"></div><div class="bd"><h3>남성 수염 제모</h3><p class="rec">추천 · 매일 면도가 번거로운 분</p><div class="tags"><span class="tag">Clarity II</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="hair" href="hair.html"><div class="media"><img src="assets/img/pc-clarity.webp" alt="클래리티 2 장비" width="329" height="411" loading="lazy" decoding="async"></div><div class="bd"><h3>겨드랑이·인중 제모</h3><p class="rec">추천 · 부위별로 꾸준히 관리하고 싶은 분</p><div class="tags"><span class="tag">Clarity II</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="scar" href="scar.html"><div class="media"><div class="ph"><span>모델 얼굴<small>4:5</small></span></div></div><div class="bd"><h3>흉터 재생 (레이저 + 새살침)</h3><p class="rec">추천 · 여드름·상처 흉터가 오래 남아 고민인 분</p><div class="tags"><span class="tag">CO₂ StraTek</span><span class="tag g">새살침</span><span class="tag g">재생관리 포함</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="scar" href="scar.html"><div class="media"><div class="ph"><span>모델 얼굴<small>4:5</small></span></div></div><div class="bd"><h3>모공 재생</h3><p class="rec">추천 · 넓어진 모공과 거칠어진 결이 신경 쓰이는 분</p><div class="tags"><span class="tag">CO₂ StraTek</span><span class="tag g">재생관리 포함</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="scar" href="scar.html"><div class="media"><div class="ph"><span>시술 장면<small>4:5</small></span></div></div><div class="bd"><h3>점·비립종 제거</h3><p class="rec">추천 · 점이나 비립종을 크기별로 상담해 보고 싶은 분</p><div class="tags"><span class="tag">CO₂ StraTek</span><span class="tag g">크기별 상담</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="booster" href="booster.html"><div class="media"><div class="ph"><span>모델 얼굴<small>4:5</small></span></div></div><div class="bd"><h3>스킨부스터</h3><p class="rec">추천 · 건조하고 윤기 없는 피부가 고민인 분</p><div class="tags"><span class="tag">DermaShine Pro</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="acne" href="acne.html"><div class="media"><div class="ph"><span>진정 관리 장면<small>4:5</small></span></div></div><div class="bd"><h3>여드름 한방 케어</h3><p class="rec">추천 · 반복되는 트러블로 지친 분</p><div class="tags"><span class="tag">약침·습부항</span><span class="tag g">Derma-S Ultra 진정</span></div><p class="price">상담 후 안내</p></div></a>
+<a class="pc" data-cat="first" href="event.html"><div class="media"><img src="assets/img/consult-pc.webp" alt="첫 방문 상담 모습" width="720" height="900" loading="lazy" decoding="async"></div><div class="bd"><h3>첫 방문 체험 프로그램</h3><p class="rec">추천 · 스킨랩이 처음이라 상담부터 받아 보고 싶은 분</p><div class="tags"><span class="tag">상담 + 체험 시술</span></div><p class="price">상담 후 안내</p></div></a>
+</div>
+<div class="note memo"><b>시안 메모</b> 가격은 공개하지 않기로 해서 카드 맨 아래 줄을 "상담 후 안내"로 두었어요. 나중에 공개하면 이 줄(<code>.price</code>)만 바꾸면 됩니다. 이벤트·할인 문구는 의료광고 심의 후 사용하세요.</div>
+</div></section>
+
+<!-- ===== VIDEO BAND ===== -->
+<section class="vb" aria-labelledby="vb-t">
+<div class="media">
+<!-- 영상 준비 후: <video id="band-video" data-bg autoplay muted loop playsinline preload="none" poster="assets/img/band.webp"><source src="assets/video/band.webm" type="video/webm"><source src="assets/video/band.mp4" type="video/mp4"></video> -->
+<div class="ph"><span>배경 영상 · 진단·시술·관리 장면 루프<small>무음 10~15초 · 1920×1080 · 자막 없음 · 4MB 이하</small></span></div>
+</div>
+<div class="w-wide">
+<div class="eb rv">How we care</div>
+<h2 id="vb-t" class="rv d1">진단부터 일상관리까지,<br><b>하나의 흐름으로</b> 이어갑니다.</h2>
+<div class="steps">
+<div class="rv"><i>01</i><b>상담·진단</b><span>야누스 프로 피부진단과 원장님과 1:1 상담</span></div>
+<div class="rv d1"><i>02</i><b>맞춤 계획</b><span>내 피부에 필요한 시술만 알차게</span></div>
+<div class="rv d2"><i>03</i><b>시술·재생관리</b><span>시술 직후 진정과 재생관리까지</span></div>
+<div class="rv d3"><i>04</i><b>일상 관리</b><span>시술 후 안내와 생활 습관 관리</span></div>
+</div>
+</div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="sec"><div class="w">
+<div class="ft-row">
+<div class="media rv"><div class="ph"><span>Clarity II / CO₂ StraTek 시술 장면<small>7:6 · 큰 사진</small></span></div></div>
+<div class="rv d1"><div class="eb">Laser × Hanbang</div><h2>한방과 <em>레이저</em>가<br>만났을 때</h2><p>흉터·모공·점은 레이저로, 회복은 새살침과 재생관리로. 시술 뒤 피부가 편안하게 돌아오는 과정까지 이어서 살펴봅니다.</p><a class="more" href="scar.html">흉터·모공·점 보기</a></div>
+</div>
+<div class="ft-row rev">
+<div class="media rv"><div class="ph"><span>Hollywood Spectra 핸드피스 시술 장면<small>7:6 · 큰 사진</small></span></div></div>
+<div class="rv d1"><div class="eb">Toning & Pigment</div><h2>기미·잡티,<br><em>체질부터</em> 보는 색소 치료</h2><p>피부 상태와 체질을 함께 보고 강도와 주기를 정합니다. 색소는 다시 생기기 쉬워서, 자외선 차단 같은 생활 습관까지 같이 챙겨드립니다.</p><a class="more" href="toning.html">토닝·색소 보기</a></div>
+</div>
+<div class="ft-row">
+<div class="media rv"><img src="assets/img/consult-wide.webp" alt="피부 진단 결과를 태블릿으로 설명하는 상담 모습" width="1092" height="936" loading="lazy" decoding="async"></div>
+<div class="rv d1"><div class="eb">1:1 Diagnosis</div><h2>야누스 프로 피부 진단 +<br><em>한방 체질 문진</em></h2><p>피부 상태를 눈으로 확인하고, 체질까지 함께 살핍니다. 그래서 같은 고민이라도 사람마다 다른 순서를 제안드립니다.</p><a class="more" href="about.html#janus">진단·장비 안내 보기</a></div>
+</div>
+</div></section>
+
+<!-- ===== DOCTOR ===== -->
+<section class="vb" style="min-height:max(520px,70svh);" aria-labelledby="dr-t">
+<div class="media"><div class="ph"><span>배너 배경 · 대표원장 가운 착용/진료 컷<small>1920×1080 · 오른쪽 인물 배치</small></span></div></div>
+<div class="w-wide">
+<div class="eb rv">Doctor</div>
+<h2 id="dr-t" class="rv d1">해빛한방병원 의료진이<br><b>직접 진료</b>합니다</h2>
+<p class="rv d2" style="margin-top:18px; max-width:520px; color:rgba(255,255,255,.85); line-height:1.8;">대표원장 최규현(한방1과), 부병원장 겸 피부미용센터장 정재원(한방4과). <span class="tbd">확인 필요 · 약력·사진</span></p>
+<a class="more rv d3" href="about.html" style="color:#9ED8C5;">의료진·철학 보기</a>
+</div>
+</section>
+
+<!-- ===== COLUMN ===== -->
+<section id="column" class="sec alt"><div class="w">
+<div class="col-hd">
+<div><div class="eb l rv">Column</div><h2 class="h2 l rv d1">규현 원장 칼럼</h2><div class="ig rv d2">@habit_skinlab <span class="tbd">확인 필요 · 인스타그램 아이디</span></div></div>
+<div class="arrows" data-slider="#col-slide"><button type="button" data-dir="prev" aria-label="이전 칼럼">←</button><button type="button" data-dir="next" aria-label="다음 칼럼">→</button></div>
+</div>
+<div class="slide" id="col-slide">
+<a class="cc" href="column.html"><div class="media"><div class="ph"><span>칼럼 커버<small>3:4</small></span></div></div><div class="ct"><small>규현 원장 칼럼</small><b>토닝 전에 알아두면 좋은 것들</b></div></a>
+<a class="cc" href="column.html"><div class="media"><div class="ph"><span>칼럼 커버<small>3:4</small></span></div></div><div class="ct"><small>규현 원장 칼럼</small><b>레이저 뒤 색소침착, 재생관리가 필요한 이유</b></div></a>
+<a class="cc" href="column.html"><div class="media"><div class="ph"><span>칼럼 커버<small>3:4</small></span></div></div><div class="ct"><small>규현 원장 칼럼</small><b>스킨부스터, 어떤 분께 맞을까요</b></div></a>
+<a class="cc" href="column.html"><div class="media"><div class="ph"><span>칼럼 커버<small>3:4</small></span></div></div><div class="ct"><small>규현 원장 칼럼</small><b>흉터 치료 이야기 · 새살침·AMTS·MLA</b></div></a>
+<a class="cc" href="column.html"><div class="media"><div class="ph"><span>칼럼 커버<small>3:4</small></span></div></div><div class="ct"><small>규현 원장 칼럼</small><b>제모, 횟수와 주기를 어떻게 잡을까요</b></div></a>
+<a class="cc" href="column.html"><div class="media"><div class="ph"><span>칼럼 커버<small>3:4</small></span></div></div><div class="ct"><small>규현 원장 칼럼</small><b>여드름 흔적과 한방 진정 관리</b></div></a>
+</div>
+</div></section>
+
+<!-- ===== CONSULT CTA ===== -->
+<section id="consult" class="cta">
+<div class="media"><div class="ph"><span>CTA 배경 · 모델 두 번째 컷 (왼쪽 배치)<small>1920×1080 · 밝은 톤</small></span></div></div>
+<div class="w"><div class="cta-card rv">
+<div class="eb">Consult</div>
+<h2>내 피부, 먼저 이야기해 주세요</h2>
+<p>오늘 고민을 말씀해 주시면, 어떤 순서가 좋을지 함께 정해 드려요. 상담과 진단만 받으셔도 괜찮습니다.</p>
+<div class="btns"><a class="btn naver" href="#">네이버 예약</a><a class="btn kakao" href="#">카카오톡 상담</a><a class="btn ln" href="tel:0637155119">☎ 063-715-5119</a></div>
+<p class="fine">효과와 경과에는 개인차가 있습니다. <span class="tbd">확인 필요 · 네이버 예약·카카오 채널 주소</span></p>
+</div></div>
+</section>
+<section id="map" class="mp sec">
+<div class="w">
+<div class="eb gray">Location</div>
+<h2 class="h2">오시는 길</h2>
+<div class="mp-g">
+<div><h3>해빛한방병원 · 스킨랩</h3>
+<dl style="margin:0;">
+<div class="row"><dt>주소</dt><dd>전북특별자치도 전주시 덕진구 사근1길 10 현대메디컬시티 <span class="tbd">확인 필요 · 층수</span></dd></div>
+<div class="row"><dt>대표번호</dt><dd><a href="tel:0637155119"><b>063-715-5119</b></a></dd></div>
+<div class="row"><dt>스킨랩 상담</dt><dd><span class="tbd">확인 필요 · 스킨랩 전용 상담번호</span></dd></div>
+</dl>
+<div class="mp-links"><a href="#">네이버 지도로 보기</a><a href="#">네이버 예약</a></div></div>
+<div><h3>진료시간</h3>
+<dl style="margin:0;">
+<div class="row"><dt>평일</dt><dd>09:00 – 21:00 (점심 12:30 – 14:00)</dd></div>
+<div class="row"><dt>토·일·공휴일</dt><dd>09:00 – 16:00 (점심 12:00 – 12:30)</dd></div>
+<div class="row"><dt>접수</dt><dd><b>진료 마감 30분 전까지 접수 가능합니다.</b></dd></div>
+</dl>
+<p style="margin-top:10px; font-size:13px; color:var(--muted);">병원 진료시간 기준입니다. <span class="tbd">확인 필요 · 스킨랩 운영시간</span></p></div>
+</div>
+<!-- 네이버 지도 임베드 코드가 정해지면 아래 .ph 를 iframe 으로 교체 -->
+<div class="media"><div class="ph"><span>지도 영역 (네이버 지도 임베드)<small>해빛한방병원 위치 · 확인 필요</small></span></div></div>
+</div>
+</section>
+</main>
+<footer class="ft">
+<div class="w">
+<div class="ft-g">
+<div>
+<a class="logo" href="index.html"><span class="logo-t"><b>habit</b> Skin Lab</span></a>
+<p style="margin-top:14px;">해빛한방병원 · 대표원장 최규현<br>사업자등록번호 111-93-95279<br>전북특별자치도 전주시 덕진구 사근1길 10 현대메디컬시티<br>대표전화 063-715-5119 · 팩스 063-715-5120 · 병동 063-715-6400</p>
+<p class="ft-links" style="margin-top:12px;"><a href="#">이용약관</a><a class="b" href="#">개인정보처리방침</a><a href="#">비급여안내</a><a href="#">해빛한방병원 홈페이지</a></p>
+</div>
+<div>
+<img src="assets/img/logo-full.png" alt="해빛한방병원" width="200" height="40" loading="lazy">
+<div class="sns" style="margin-top:18px;"><a href="https://www.instagram.com/habithospital" aria-label="인스타그램">IG</a><a href="https://blog.naver.com/habit-hospital" aria-label="네이버 블로그">N</a><a href="https://www.youtube.com/@habithospital" aria-label="유튜브">▶</a><a href="#" aria-label="카카오톡 채널">K</a></div>
+</div>
+</div>
+<p class="disc">시술 효과와 경과에는 개인차가 있으며, 부작용이 생길 수 있습니다. 시술 여부는 의료진 진단 후 결정됩니다. 홈페이지의 모델 이미지는 연출 사진이며 실제 시술 결과가 아닙니다.<br>© 2026 HABIT Hospital of Korean Medicine. All rights reserved.</p>
+</div>
+</footer>
+<div class="fab" aria-label="상담 바로가기">
+<a class="f1" href="#"><span>N</span>톡톡</a>
+<a class="f2" href="tel:0637155119"><span>☎</span>전화</a>
+<a class="f3" href="#"><span>●</span>카톡</a>
+<button class="top" type="button" aria-label="맨 위로">↑</button>
+</div>
+<nav class="mbar" aria-label="빠른 상담">
+<a href="tel:0637155119">☎ 전화</a>
+<a class="k" href="#">카카오톡</a>
+<a class="b" href="#">네이버 예약</a>
+</nav>
+<!-- 접속 팝업: 각 .poster 의 data-pop 값이 '보지 않기' 저장 키입니다. 관리자 화면이 생기면 이 목록을 데이터로 교체하세요. -->
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-label="스킨랩 안내" hidden>
+<div class="pop-in">
+<div class="poster" data-pop="first-visit"><div class="img"><b>첫 방문 체험<br>프로그램</b><span>상담과 체험 시술로 가볍게 시작해 보세요</span></div><div class="bar"><button type="button" data-hide="1">1일 동안 보지 않기</button><button type="button" data-close>닫기</button></div></div>
+<div class="poster" data-pop="inpatient"><div class="img"><b>입원 환자분께<br>드리는 혜택</b><span>자세한 내용은 상담 시 안내드려요</span></div><div class="bar"><button type="button" data-hide="1">1일 동안 보지 않기</button><button type="button" data-close>닫기</button></div></div>
+<div class="poster" data-pop="new-device"><div class="img"><b>신규 장비<br>오픈 안내</b><span>새 장비를 소개합니다</span></div><div class="bar"><button type="button" data-hide="1">1일 동안 보지 않기</button><button type="button" data-close>닫기</button></div></div>
+</div>
+</div>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
