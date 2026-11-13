@@ -396,25 +396,24 @@
 .sh-media.sh-fit > img{object-fit:contain; object-position:72% 70%; padding:calc(var(--hd-h) + 10px) 0 24px;}
 @media (max-width:700px){ .sh-media.sh-fit > img{object-position:50% 60%; padding-bottom:8px;} }
 
-/* ---------- event hero: full-screen video background (like the main hero) ---------- */
+/* ---------- event hero: 영상을 화면 전체 배경으로, 글씨는 영상 위에 ---------- */
+/* 영상(1920x1080): 모델은 가로 약 66% 지점, 나머지는 아이보리로 흐린 배경 */
 .sh.sh-vid{min-height:max(640px,92svh); align-items:center;}
-.sh-vid .sh-media{inset:0 0 0 40%; border-radius:0; background:var(--ivory);}
-.sh-vid .sh-media > video{object-position:50% 30%;}
-.sh-vid::before{background:linear-gradient(180deg,color-mix(in srgb,var(--ivory) 85%,transparent) 0%,transparent calc(var(--hd-h) + 60px)), linear-gradient(90deg,var(--ivory) 0%,var(--ivory) 40%,color-mix(in srgb,var(--ivory) 55%,transparent) 47%,transparent 58%), linear-gradient(0deg,color-mix(in srgb,var(--ivory) 70%,transparent) 0%,transparent 20%);}
+.sh-vid .sh-media{inset:0; border-radius:0; background:var(--ivory);}
+.sh-vid .sh-media > video{object-position:60% 40%;}
+.sh-vid::before{background:linear-gradient(180deg,color-mix(in srgb,var(--ivory) 70%,transparent) 0%,transparent calc(var(--hd-h) + 50px)), linear-gradient(90deg,color-mix(in srgb,var(--ivory) 85%,transparent) 0%,color-mix(in srgb,var(--ivory) 60%,transparent) 32%,transparent 50%);}
 .sh-vid .sh-in{padding-bottom:48px;}
 .sh-vid .sh-in > *{max-width:min(520px,44%);}
 .sh-vid p{font-size:clamp(17px,1.4vw,20px); color:var(--ui); font-weight:500;}
 @media (max-width:1000px){
-  .sh-vid .sh-media{left:30%;}
-  .sh-vid::before{background:linear-gradient(180deg,color-mix(in srgb,var(--ivory) 85%,transparent) 0%,transparent calc(var(--hd-h) + 60px)), linear-gradient(90deg,var(--ivory) 0%,var(--ivory) 30%,color-mix(in srgb,var(--ivory) 60%,transparent) 40%,transparent 55%), linear-gradient(0deg,color-mix(in srgb,var(--ivory) 70%,transparent) 0%,transparent 20%);}
-  .sh-vid .sh-in > *{max-width:50%;}
+  .sh-vid .sh-media > video{object-position:68% 40%;}
+  .sh-vid .sh-in > *{max-width:52%;}
 }
-/* 모바일: 제목 아래 세로(4:5) 영상 카드 */
+/* 모바일: 영상이 화면 전체, 글씨는 아래쪽 영상 위에 */
 @media (max-width:700px){
-  .sh.sh-vid{min-height:auto; flex-direction:column; align-items:stretch;}
-  .sh-vid::before{display:none;}
-  .sh-vid .sh-media{position:relative; inset:auto; order:2; width:auto; margin:0 24px 36px; aspect-ratio:4/5; border-radius:24px; overflow:hidden; box-shadow:0 30px 60px -30px rgba(40,60,52,.28);}
-  .sh-vid .sh-media > video{object-position:50% 35%;}
-  .sh-vid .sh-in{padding-bottom:24px;}
+  .sh.sh-vid{min-height:max(620px,88svh); align-items:flex-end;}
+  .sh-vid .sh-media > video{object-position:68.5% 30%;}
+  .sh-vid::before{background:linear-gradient(180deg,color-mix(in srgb,var(--ivory) 92%,transparent) 0%,color-mix(in srgb,var(--ivory) 70%,transparent) var(--hd-h),transparent calc(var(--hd-h) + 70px)), linear-gradient(0deg,color-mix(in srgb,var(--ivory) 92%,transparent) 0%,color-mix(in srgb,var(--ivory) 75%,transparent) 26%,transparent 50%);}
+  .sh-vid .sh-in{padding-bottom:32px;}
   .sh-vid .sh-in > *{max-width:none;}
 }
