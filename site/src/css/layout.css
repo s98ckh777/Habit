@@ -417,3 +417,59 @@
   .sh-vid .sh-in{padding-bottom:32px;}
   .sh-vid .sh-in > *{max-width:none;}
 }
+/* ---------- 원장 칼럼: 글 페이지 ---------- */
+.art-w{max-width:760px;}
+.art-hd{background:var(--ivory); padding:calc(var(--hd-h) + 48px) 0 48px;}
+.art-series{margin-top:28px; font-size:13.5px; font-weight:600; color:var(--ui); letter-spacing:-0.01em;}
+.art-hd h1{margin-top:10px; font-size:clamp(28px,3.4vw,42px); font-weight:700; line-height:1.3; letter-spacing:-0.035em; color:var(--hero-fg);}
+.art-sub{margin-top:12px; font-size:clamp(17px,1.6vw,20px); line-height:1.6; color:var(--hero-muted);}
+.art-by{margin-top:22px; font-size:14px; color:var(--hero-muted);}
+.art{padding:56px 0 96px;}
+.art p{margin-top:18px; font-size:17px; line-height:1.9;}
+.art h2{margin-top:56px; font-size:23px; font-weight:700; line-height:1.4; letter-spacing:-0.03em;}
+.art h2 + p{margin-top:14px;}
+.art ul,.art ol{margin:18px 0 0; padding-left:1.4em; font-size:17px; line-height:1.85;}
+.art li + li{margin-top:6px;}
+.art-lead{font-size:18px;}
+.art-key{margin-top:32px !important; padding:22px 26px; border-radius:16px; background:var(--soft); color:var(--hero-fg); font-weight:600;}
+.art-warn{padding:16px 20px; border-radius:12px; border:1px solid color-mix(in srgb,#C2410C 45%,transparent); background:color-mix(in srgb,#C2410C 7%,transparent); font-weight:600;}
+.art-next{margin-top:40px !important; color:var(--muted); font-size:16px !important;}
+.art-fig{margin:36px 0 0;}
+.art-fig img{display:block; width:100%; height:auto; border-radius:16px; border:1px solid var(--border); background:#fff;}
+.art-fig figcaption{margin-top:10px; font-size:13px; color:var(--muted); text-align:center;}
+.art-disc{margin-top:48px; padding:18px 22px; border-radius:12px; background:var(--bg); font-size:14px; line-height:1.8; color:var(--muted);}
+.art-disc b{color:var(--fg); margin-right:6px;}
+.art-refs{margin-top:28px;}
+.art .art-refs h2,.art .art-list h2{margin-top:0; font-size:16px;}
+.art-refs ul{font-size:14px; line-height:1.8; color:var(--muted); margin-top:8px;}
+.art-pn{margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.art-pn a{display:block; padding:18px 20px; border:1px solid var(--border); border-radius:14px; transition:border-color .2s, background .2s;}
+.art-pn a:hover{border-color:var(--ui); background:var(--soft);}
+.art-pn .nx{text-align:right;}
+.art-pn small{display:block; font-size:13px; color:var(--ui); font-weight:600;}
+.art-pn b{display:block; margin-top:4px; font-size:15.5px; line-height:1.45;}
+.art-list{margin-top:40px; padding:24px 26px; border-radius:16px; border:1px solid var(--border);}
+.art-list ol{list-style:none; padding:0; margin-top:12px; font-size:15.5px;}
+.art-list li{display:flex;}
+.art-list li a,.art-list li[aria-current] {display:flex; gap:12px; width:100%; padding:8px 0;}
+.art-list li span{flex:none; width:36px; color:var(--muted); font-size:14px; padding-top:1px;}
+.art-list li b{font-weight:500;}
+.art-list li a:hover b{color:var(--ui);}
+.art-list li[aria-current] b{font-weight:700; color:var(--ui);}
+.art-back{margin-top:40px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+@media (max-width:700px){
+  .art-hd{padding:calc(var(--hd-h) + 28px) 0 36px;}
+  .art{padding:40px 0 72px;}
+  .art p,.art ul,.art ol{font-size:16.5px;}
+  .art h2{margin-top:44px; font-size:21px;}
+  .art-fig{margin-top:28px; margin-inline:-8px;}
+  .art-pn{grid-template-columns:1fr;}
+  .art-pn .nx{text-align:left;}
+}
+
+/* ---------- 칼럼 카드: 글자 표지 ---------- */
+.cv{background:linear-gradient(165deg,var(--soft) 0%,var(--ivory-2) 70%);}
+.cv-in{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:space-between; padding:22px 22px 24px;}
+.cv-in small{font-size:12.5px; font-weight:600; color:var(--ui); letter-spacing:.04em;}
+.cv-in b{font-size:clamp(56px,6vw,84px); font-weight:300; line-height:1; color:var(--ui); letter-spacing:-0.04em;}
+.cv-in span{font-size:17px; font-weight:700; color:var(--hero-fg); line-height:1.4;}
