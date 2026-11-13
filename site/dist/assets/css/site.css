@@ -579,18 +579,21 @@ img,video{max-width:100%; display:block;}
 .sh-media.sh-fit > img{object-fit:contain; object-position:72% 70%; padding:calc(var(--hd-h) + 10px) 0 24px;}
 @media (max-width:700px){ .sh-media.sh-fit > img{object-position:50% 60%; padding-bottom:8px;} }
 
-/* ---------- event hero: portrait video frame ---------- */
-.sh.sh-vid{min-height:max(640px,86svh); align-items:center;}
+/* ---------- event hero: 16:9 video frame ---------- */
+.sh.sh-vid{min-height:max(560px,70svh); align-items:center;}
 .sh-vid::before{display:none;}
-.sh-vid .sh-media{inset:calc(var(--hd-h) + 28px) max(24px,calc((100vw - 1152px)/2)) 40px auto; aspect-ratio:2/3; height:auto; border-radius:32px; overflow:hidden; background:#EEF0EF; box-shadow:0 30px 60px -30px rgba(40,60,52,.28);}
-.sh-vid .sh-media > video{object-position:50% 35%;}
+.sh-vid .sh-media{inset:auto max(24px,calc((100vw - 1152px)/2)) auto auto; top:calc(50% + var(--hd-h) / 2 - 12px); transform:translateY(-50%); width:min(660px,52vw); aspect-ratio:16/9; height:auto; border-radius:28px; overflow:hidden; background:#EEF0EF; box-shadow:0 30px 60px -30px rgba(40,60,52,.28);}
+.sh-vid .sh-media > video{object-position:50% 50%;}
 .sh-vid .sh-in{padding-bottom:48px;}
-.sh-vid .sh-in > *{max-width:min(560px,52%);}
+.sh-vid .sh-in > *{max-width:min(480px,40%);}
 .sh-vid p{font-size:clamp(17px,1.4vw,20px); color:var(--ui); font-weight:500;}
-@media (max-width:1000px){ .sh-vid .sh-in > *{max-width:50%;} }
-@media (max-width:700px){
+@media (max-width:1000px){
   .sh.sh-vid{min-height:auto; flex-direction:column; align-items:stretch;}
-  .sh-vid .sh-media{position:relative; inset:auto; order:2; width:auto; margin:0 24px 36px; aspect-ratio:4/5; border-radius:24px;}
+  .sh-vid .sh-media{position:relative; inset:auto; transform:none; order:2; width:auto; margin:0 24px 40px; aspect-ratio:16/9; border-radius:24px;}
+  .sh-vid .sh-in > *{max-width:none;}
+}
+@media (max-width:700px){
+  .sh-vid .sh-media{margin:0 24px 36px; border-radius:20px;}
   .sh-vid .sh-in{padding-bottom:24px;}
   .sh-vid .sh-in > *{max-width:none;}
 }
