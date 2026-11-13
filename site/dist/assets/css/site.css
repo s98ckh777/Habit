@@ -592,11 +592,12 @@ img,video{max-width:100%; display:block;}
   .sh-vid::before{background:linear-gradient(180deg,color-mix(in srgb,var(--ivory) 85%,transparent) 0%,transparent calc(var(--hd-h) + 60px)), linear-gradient(90deg,var(--ivory) 0%,var(--ivory) 30%,color-mix(in srgb,var(--ivory) 60%,transparent) 40%,transparent 55%), linear-gradient(0deg,color-mix(in srgb,var(--ivory) 70%,transparent) 0%,transparent 20%);}
   .sh-vid .sh-in > *{max-width:50%;}
 }
+/* 모바일: 제목 아래 세로(4:5) 영상 카드 */
 @media (max-width:700px){
-  .sh.sh-vid{min-height:max(640px,92svh); align-items:flex-end;}
-  .sh-vid .sh-media{inset:0 0 34% 0;}
-  .sh-vid .sh-media > video{object-position:50% 25%;}
-  .sh-vid::before{background:linear-gradient(180deg,color-mix(in srgb,var(--ivory) 85%,transparent) 0%,transparent calc(var(--hd-h) + 40px)), linear-gradient(0deg,var(--ivory) 0%,var(--ivory) 34%,color-mix(in srgb,var(--ivory) 70%,transparent) 48%,transparent 66%);}
-  .sh-vid .sh-in{padding-bottom:32px;}
+  .sh.sh-vid{min-height:auto; flex-direction:column; align-items:stretch;}
+  .sh-vid::before{display:none;}
+  .sh-vid .sh-media{position:relative; inset:auto; order:2; width:auto; margin:0 24px 36px; aspect-ratio:4/5; border-radius:24px; overflow:hidden; box-shadow:0 30px 60px -30px rgba(40,60,52,.28);}
+  .sh-vid .sh-media > video{object-position:50% 35%;}
+  .sh-vid .sh-in{padding-bottom:24px;}
   .sh-vid .sh-in > *{max-width:none;}
 }

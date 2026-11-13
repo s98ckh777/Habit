@@ -30,10 +30,11 @@ function jsonld(meta, slug, url) {
     name: '해빛한방병원 한방피부클리닉 habit Skin Lab',
     url: cfg.siteUrl + '/',
     telephone: '+82-' + cfg.tel.replace(/^0/, ''),
-    address: { '@type': 'PostalAddress', streetAddress: '사근1길 10 현대메디컬시티', addressLocality: '전주시 덕진구', addressRegion: '전북특별자치도', addressCountry: 'KR' },
+    address: { '@type': 'PostalAddress', streetAddress: '사근1길 10 현대메디컬시티 2층', addressLocality: '전주시 덕진구', addressRegion: '전북특별자치도', addressCountry: 'KR' },
     openingHoursSpecification: [
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '21:00' },
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday', 'Sunday'], opens: '09:00', closes: '16:00' }
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Wednesday'], opens: '09:00', closes: '19:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '09:00', closes: '14:00' }
     ],
     parentOrganization: { '@type': 'Hospital', name: cfg.hospitalName },
     sameAs: [cfg.blogUrl, cfg.youtubeUrl, cfg.instagramUrl]
