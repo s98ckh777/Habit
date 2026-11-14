@@ -473,3 +473,26 @@
 .cv-in small{font-size:12.5px; font-weight:600; color:var(--ui); letter-spacing:.04em;}
 .cv-in b{font-size:clamp(56px,6vw,84px); font-weight:300; line-height:1; color:var(--ui); letter-spacing:-0.04em;}
 .cv-in span{font-size:17px; font-weight:700; color:var(--hero-fg); line-height:1.4;}
+
+/* ---------- 원장 칼럼 목록: 책 사진을 가로로 긴 배경으로 ---------- */
+.sh.sh-col{min-height:clamp(380px,36vw,520px); align-items:center; background:#1E2624;}
+.sh-col .sh-media{inset:0; border-radius:0; background:#1E2624;}
+.sh-col .sh-media > img{object-position:60% 62%;}
+.sh-col::before{background:linear-gradient(180deg,rgba(20,28,26,.55) 0%,transparent calc(var(--hd-h) + 40px)), linear-gradient(90deg,rgba(22,32,29,.94) 0%,rgba(22,32,29,.86) 30%,rgba(22,32,29,.45) 52%,rgba(22,32,29,.08) 72%);}
+.sh-col .sh-in{padding-bottom:56px;}
+.sh-col .crumb,.sh-col .crumb a{color:rgba(255,255,255,.72);}
+.sh-col .crumb a:hover{color:#fff;}
+.sh-col .eb{color:#9ED8C5;}
+.sh-col h1{color:#fff; letter-spacing:-0.03em;}
+.sh-col p{color:rgba(255,255,255,.82);}
+@media (max-width:700px){
+  .sh.sh-col{min-height:420px; align-items:flex-end;}
+  .sh-col .sh-media > img{object-position:72% 60%;}
+  .sh-col::before{background:linear-gradient(180deg,rgba(20,28,26,.6) 0%,transparent calc(var(--hd-h) + 30px)), linear-gradient(0deg,rgba(22,32,29,.95) 0%,rgba(22,32,29,.85) 38%,rgba(22,32,29,.2) 75%);}
+  .sh-col .sh-in{padding-bottom:36px;}
+}
+/* 칼럼 목록 첫 화면: 어두운 사진 위에서는 헤더 글자를 밝게 (스크롤하면 원래대로) */
+body:has(.sh-col):not(.menu-open) .hd:not(.solid) :is(.logo-t,.gnb > a,.gnb .dd > button,.to-h,.burger){color:#fff;}
+body:has(.sh-col):not(.menu-open) .hd:not(.solid) .logo-t b{color:#9ED8C5;}
+body:has(.sh-col):not(.menu-open) .hd:not(.solid) .logo-s{color:rgba(255,255,255,.7);}
+body:has(.sh-col):not(.menu-open) .hd:not(.solid) .gnb > a[aria-current="page"]{color:#9ED8C5;}
