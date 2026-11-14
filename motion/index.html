@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>해빛 365 모션</title>
+<style>
+@font-face{font-family:"Pretendard";src:url("fonts/pretendard-motion.woff2") format("woff2");font-weight:100 900;font-display:block}
+:root{
+  --teal:#357075;--teal-d:#244F53;--teal-soft:#E3EFEC;--sun:#EFCC70;--sun-d:#B98A24;--sun-soft:#FBF0D3;
+  --ink:#2B3336;--sub:#66706C;--ivory:#F7F4EC;--page:#E9E7E1;--ctl:#2B3336;--ctl-bg:rgba(255,255,255,.85);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--page:#0E1213;--ctl:#EDF2EF;--ctl-bg:rgba(24,29,27,.85)}}
+:root[data-theme="dark"]{--page:#0E1213;--ctl:#EDF2EF;--ctl-bg:rgba(24,29,27,.85)}
+html,body{margin:0;height:100%}
+body{background:var(--page);overflow:hidden;font-family:"Pretendard",system-ui,sans-serif}
+#wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{position:relative;width:1920px;height:1080px;flex:none;overflow:hidden;background:var(--ivory);color:var(--ink);
+  font-family:"Pretendard",system-ui,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.02em;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+body.render{background:var(--ivory)}
+body.render #wrap{display:block}
+body.render #stage{box-shadow:none}
+.layer{position:absolute;inset:0}
+.abs{position:absolute}
+section{position:absolute;inset:0;display:none}
+.row{position:absolute;left:0;right:0;text-align:center;white-space:nowrap}
+.split .ch{display:inline-block;will-change:transform,opacity}
+.h1{font-size:100px;font-weight:700;line-height:1.15}
+.h2{font-size:84px;font-weight:700;line-height:1.2}
+.h3{font-size:60px;font-weight:600;line-height:1.25}
+.sub{font-size:40px;font-weight:500;color:var(--sub);line-height:1.4}
+.pill{display:inline-block;padding:12px 30px;border-radius:999px;font-size:30px;font-weight:600;letter-spacing:0}
+.pill.teal{background:var(--teal);color:#fff}
+.pill.sun{background:var(--sun);color:#4E3A0C}
+.pill.line{border:2px solid var(--teal);color:var(--teal);background:rgba(255,255,255,.6)}
+.hl{color:var(--teal)}
+.hl-sun{color:var(--sun-d)}
+
+/* sky, sun, hills */
+#sky{background:var(--ivory)}
+#sun{position:absolute;left:0;top:0;width:0;height:0}
+#sun .core{position:absolute;border-radius:50%;background:radial-gradient(circle at 38% 35%,#F7DE97 0%,#EFCC70 55%,#E8BF5C 100%)}
+#sun .glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(239,204,112,.55) 0%,rgba(239,204,112,.22) 35%,rgba(239,204,112,0) 70%)}
+#rays{position:absolute;overflow:visible}
+#hills{position:absolute;left:0;top:680px;width:1920px;height:400px}
+#iris{background:var(--ivory)}
+#irisRing{position:absolute;left:960px;top:540px;border-radius:50%;border:4px solid var(--sun);box-shadow:0 0 40px rgba(239,204,112,.6);display:none}
+#grain{pointer-events:none;opacity:.07;mix-blend-mode:multiply;background-size:300px 300px}
+#vignette{pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(20,30,30,.10) 100%)}
+
+/* s1 */
+#count{position:absolute;left:960px;top:400px;transform:translate(-50%,-50%);display:flex;align-items:baseline;color:var(--teal);font-weight:800;white-space:nowrap}
+#num{font-size:172px;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1}
+#count .unit{font-size:74px;font-weight:700;margin-left:6px}
+#days{position:absolute;left:0;right:0;top:800px;display:flex;justify-content:center;gap:18px}
+.day{width:84px;height:84px;border-radius:42px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:600;
+  background:#fff;border:2px solid #D3DFDA;color:var(--teal);box-sizing:border-box;letter-spacing:0}
+.day.on{background:var(--sun);border-color:var(--sun);color:#4E3A0C}
+.day.wide{width:150px}
+
+/* s2 */
+#clockWrap{position:absolute;left:0;right:0;top:250px;text-align:center}
+#clkLabel{font-size:36px;font-weight:600;letter-spacing:.02em}
+#clock{font-size:220px;font-weight:700;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+#bar{position:relative;width:1100px;height:90px;margin:28px auto 0}
+#bar .track,#bar .fill{position:absolute;left:0;top:20px;height:6px;border-radius:3px}
+#bar .track{width:100%;background:rgba(43,51,54,.15)}
+#bar .fill{background:var(--sun)}
+#bar .dot{position:absolute;top:23px;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 8px rgba(239,204,112,.3)}
+#bar .lb{position:absolute;top:50px;font-size:28px;font-weight:600;transform:translateX(-50%);font-variant-numeric:tabular-nums}
+.card{width:560px;padding:38px 0 34px;border-radius:30px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);text-align:center;color:#fff;backdrop-filter:blur(4px)}
+.card .k{font-size:34px;font-weight:600;color:var(--sun)}
+.card .v{font-size:78px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:6px;letter-spacing:-.02em}
+.card .m{font-size:26px;color:rgba(255,255,255,.62);margin-top:6px}
+#cards{position:absolute;left:0;right:0;top:480px;display:flex;justify-content:center;gap:40px}
+
+/* s3 */
+#figs{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible}
+.fl{position:absolute;top:478px;font-size:40px;font-weight:700;transform:translateX(-50%);white-space:nowrap}
+.fl small{font-size:30px;font-weight:600;color:var(--sub);margin-right:8px}
+#pills3{position:absolute;left:0;right:0;top:640px;display:flex;justify-content:center;gap:24px}
+.ipill{display:flex;align-items:center;gap:14px;padding:16px 34px 16px 22px;border-radius:999px;background:#fff;box-shadow:0 8px 30px rgba(53,112,117,.12);font-size:36px;font-weight:600;color:var(--teal-d)}
+.ipill svg{width:52px;height:52px}
+
+/* s4 */
+.icons{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.ic{position:absolute;width:240px;height:240px;margin-left:-120px;top:450px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ic svg{width:150px;height:150px;overflow:visible}
+.ic svg *{fill:none;stroke:var(--teal);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.ic.a{background:var(--teal-soft)}
+.ic.b{background:var(--sun-soft)}
+.ic.b svg *{stroke:#A87A1C}
+.icl{position:absolute;top:722px;transform:translateX(-50%);font-size:44px;font-weight:700;white-space:nowrap}
+
+/* s5 */
+#wheel{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.wi{position:absolute;left:1000px;top:0;font-size:84px;font-weight:700;white-space:nowrap;transform-origin:left center;color:var(--teal-d)}
+#wbar{position:absolute;left:950px;top:500px;width:10px;height:80px;border-radius:5px;background:var(--sun)}
+
+/* s6 */
+.node{position:absolute;top:458px;width:124px;height:124px;margin-left:-62px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;box-shadow:0 10px 30px rgba(53,112,117,.25);letter-spacing:0}
+.nt{position:absolute;top:620px;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.nt b{display:block;font-size:46px;font-weight:700}
+.nt span{display:block;font-size:32px;color:var(--sub);margin-top:10px;font-weight:500}
+
+/* s7 / end */
+#logo{position:absolute;left:570px;top:330px;width:780px}
+#mark{position:absolute;left:64px;top:52px;width:220px}
+#info{position:absolute;left:0;right:0;top:580px;text-align:center}
+#info .pills{display:flex;justify-content:center;gap:16px}
+#tel{font-size:66px;font-weight:700;margin-top:44px;letter-spacing:0;font-variant-numeric:tabular-nums}
+#addr{font-size:30px;color:var(--sub);margin-top:14px;font-weight:500;letter-spacing:-.01em}
+
+/* preview controls */
+#ctl{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:8px 14px;border-radius:999px;
+  background:var(--ctl-bg);color:var(--ctl);backdrop-filter:blur(8px);font:500 14px/1 "Pretendard",system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.18);
+  width:min(560px,calc(100vw - 32px));box-sizing:border-box;z-index:10}
+#ctl button{border:0;background:none;color:inherit;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;padding:0}
+#ctl button:hover{background:rgba(127,127,127,.18)}
+#ctl input{flex:1;accent-color:#357075;min-width:0}
+#ctl a{color:inherit;font-weight:600;text-decoration:none;white-space:nowrap}
+#time{font-variant-numeric:tabular-nums;min-width:74px;text-align:right}
+body.render #ctl{display:none}
+</style>
+</head>
+<body>
+<div id="wrap">
+<div id="stage">
+  <div id="sky" class="layer"></div>
+  <svg id="stars" class="layer" viewBox="0 0 1920 1080"></svg>
+  <svg id="moon" class="abs" width="120" height="120" viewBox="0 0 120 120" style="left:1500px;top:150px;overflow:visible">
+    <defs><mask id="mm"><rect width="120" height="120" fill="#fff"/><circle cx="82" cy="44" r="46" fill="#000"/></mask>
+      <radialGradient id="mg"><stop offset="0" stop-color="#FFF4D6" stop-opacity=".35"/><stop offset="1" stop-color="#FFF4D6" stop-opacity="0"/></radialGradient></defs>
+    <circle cx="60" cy="60" r="110" fill="url(#mg)"/>
+    <circle cx="60" cy="60" r="50" fill="#FFF1C9" mask="url(#mm)"/>
+  </svg>
+  <div id="sun">
+    <svg id="rays" viewBox="-300 -300 600 600" width="600" height="600" style="left:-300px;top:-300px"></svg>
+    <div class="glow"></div><div class="core"></div>
+  </div>
+  <svg id="hills" viewBox="0 0 1920 400" preserveAspectRatio="none">
+    <path id="hillB" d="M0 250 C 260 170, 520 190, 760 225 S 1220 165, 1460 205 S 1800 245, 1920 195 V400 H0 Z"/>
+    <path id="hillF" d="M0 315 C 320 255, 640 300, 940 288 S 1540 245, 1920 298 V400 H0 Z"/>
+  </svg>
+  <svg id="birds" class="layer" viewBox="0 0 1920 1080" style="display:none"></svg>
+
+  <!-- S1 : 365 -->
+  <section id="s1">
+    <svg id="ring" class="layer" viewBox="0 0 1920 1080"></svg>
+    <div id="hook" class="row h2 split" style="top:640px">아픔은 요일을 가리지 않습니다</div>
+    <div id="count"><span id="num">0</span><span class="unit">일</span></div>
+    <div id="s1sub" class="row split" style="top:688px;font-size:52px;font-weight:600">토요일 · 일요일 · <span class="hl">공휴일에도 진료합니다</span></div>
+    <div id="days">
+      <div class="day">월</div><div class="day">화</div><div class="day">수</div><div class="day">목</div><div class="day">금</div>
+      <div class="day on">토</div><div class="day on">일</div><div class="day on wide">공휴일</div>
+    </div>
+  </section>
+
+  <!-- S2 : hours -->
+  <section id="s2">
+    <div id="clockWrap">
+      <div id="clkLabel">평일 진료</div>
+      <div id="clock">09:00</div>
+      <div id="bar"><div class="track"></div><div class="fill"></div><div class="dot"></div></div>
+    </div>
+    <div class="row" style="top:210px"><span id="nightPill" class="pill sun" style="display:inline-block">평일 야간진료</span></div>
+    <div id="s2h" class="row h1 split" style="top:290px;color:#fff">평일은 매일, <span style="color:var(--sun)">밤 9시까지</span></div>
+    <div id="cards">
+      <div class="card" id="c1"><div class="k">평일</div><div class="v">09:00 – 21:00</div><div class="m">점심시간 12:30 – 14:00</div></div>
+      <div class="card" id="c2"><div class="k">토 · 일 · 공휴일</div><div class="v">09:00 – 16:00</div><div class="m">점심시간 12:00 – 12:30</div></div>
+    </div>
+    <div id="s2cap" class="row sub split" style="top:790px;color:rgba(255,255,255,.78)">언제든 편하게 오실 수 있도록, 진료 시간을 넓혀 왔습니다</div>
+  </section>
+
+  <div id="iris" class="layer"></div>
+  <div id="irisRing"></div>
+  <img id="mark" src="logo-full.png" alt="">
+
+  <!-- S3 : team -->
+  <section id="s3">
+    <div id="s3h" class="row h2 split" style="top:150px"><span class="hl">한의사 7명</span> · <span class="hl-sun">의사 1명</span>이 함께 진료합니다</div>
+    <svg id="figs" viewBox="0 0 1920 1080"></svg>
+    <div class="fl" id="fl1" style="left:875px"><small>한의사</small><span id="n7">0</span>명</div>
+    <div class="fl" id="fl2" style="left:1423px"><small>의사</small><span id="n1">0</span>명</div>
+    <div id="pills3">
+      <div class="ipill" id="ip1"><svg viewBox="0 0 52 52" fill="none" stroke="#357075" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14v26M6 32h40v8M46 32v-6a6 6 0 0 0-6-6H22v12"/><circle cx="14" cy="25" r="4"/></svg>입원 치료</div>
+      <div class="ipill" id="ip2"><svg viewBox="0 0 52 52" fill="none" stroke="#357075" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="9" r="4.5"/><path d="M24 18l-6 12M24 18l8 4 4 8M24 18l-2 14 8 12M22 32l-8 12"/></svg>외래 진료</div>
+    </div>
+    <div id="s3cap" class="row sub split" style="top:770px">입원 치료를 중심으로, 외래로도 많은 분들이 찾아주십니다</div>
+  </section>
+
+  <!-- S4 : treatments -->
+  <section id="s4">
+    <div id="s4aL" class="row" style="top:170px"><span class="pill teal">해빛의 한방 치료</span></div>
+    <div id="s4aH" class="row h2 split" style="top:250px">침 · 추나 · 약침 · 한약</div>
+    <div id="s4a" class="icons">
+      <div class="ic a" style="left:480px"><svg viewBox="0 0 120 120">
+        <rect x="53" y="12" width="14" height="30" rx="3" pathLength="1"/><path d="M53 20h14M53 27h14M53 34h14" pathLength="1"/>
+        <path d="M60 42v52" pathLength="1"/><path d="M26 100c12-7 22-7 34-4s22 3 34-4" pathLength="1"/></svg></div>
+      <div class="ic a" style="left:800px"><svg viewBox="0 0 120 120">
+        <path d="M60 14c-10 20 10 32 0 52s10 32 0 42" pathLength="1"/>
+        <rect x="50" y="22" width="20" height="12" rx="4" pathLength="1"/><rect x="51" y="42" width="20" height="12" rx="4" pathLength="1"/>
+        <rect x="49" y="62" width="20" height="12" rx="4" pathLength="1"/><rect x="51" y="82" width="20" height="12" rx="4" pathLength="1"/>
+        <path d="M28 40c-10 14-10 30 0 44M92 40c10 14 10 30 0 44" pathLength="1"/></svg></div>
+      <div class="ic a" style="left:1120px"><svg viewBox="0 0 120 120"><g transform="rotate(-40 60 60)">
+        <rect x="34" y="50" width="44" height="20" rx="4" pathLength="1"/><path d="M78 60h16M94 48v24M34 60H14" pathLength="1"/>
+        <path d="M44 50v8M54 50v8M64 50v8" pathLength="1"/></g>
+        <path d="M30 86c0 0-6 8-6 12a6 6 0 0 0 12 0c0-4-6-12-6-12z" pathLength="1"/></svg></div>
+      <div class="ic a" style="left:1440px"><svg viewBox="0 0 120 120">
+        <path d="M20 62h80c-2 22-18 34-40 34S22 84 20 62z" pathLength="1"/><path d="M42 102h36" pathLength="1"/>
+        <path d="M46 50c-6-8 6-12 0-22M60 48c-6-8 6-12 0-22M74 50c-6-8 6-12 0-22" pathLength="1"/></svg></div>
+      <div class="icl" style="left:480px">침</div><div class="icl" style="left:800px">추나</div>
+      <div class="icl" style="left:1120px">약침</div><div class="icl" style="left:1440px">한약</div>
+    </div>
+    <div id="s4bL" class="row" style="top:170px"><span class="pill sun">피부까지 건강하게</span></div>
+    <div id="s4bH" class="row h2 split" style="top:250px">레이저 피부미용 · 새살침 · 스킨부스터</div>
+    <div id="s4b" class="icons">
+      <div class="ic b" style="left:600px"><svg viewBox="0 0 120 120">
+        <path d="M66 26c3 20 13 30 33 33-20 3-30 13-33 33-3-20-13-30-33-33 20-3 30-13 33-33z" pathLength="1"/>
+        <path d="M26 22l10 10M18 40l8 3M40 14l3 8" pathLength="1"/><path d="M28 86c2 7 5 10 12 12-7 2-10 5-12 12-2-7-5-10-12-12 7-2 10-5 12-12z" pathLength="1"/></svg></div>
+      <div class="ic b" style="left:960px"><svg viewBox="0 0 120 120">
+        <path d="M14 74c15-8 31-8 46 0s31 8 46 0" pathLength="1"/><path d="M14 92c15-8 31-8 46 0s31 8 46 0" pathLength="1"/>
+        <path d="M42 24v42M60 18v48M78 24v42" pathLength="1"/><path d="M38 24h8M56 18h8M74 24h8" pathLength="1"/></svg></div>
+      <div class="ic b" style="left:1320px"><svg viewBox="0 0 120 120">
+        <path d="M60 14C60 14 30 50 30 72a30 30 0 0 0 60 0C90 50 60 14 60 14z" pathLength="1"/>
+        <path d="M45 74c0 9 6 15 14 16" pathLength="1"/><circle cx="96" cy="30" r="6" pathLength="1"/><circle cx="24" cy="40" r="4" pathLength="1"/></svg></div>
+      <div class="icl" style="left:600px">레이저 피부미용</div><div class="icl" style="left:960px">새살침</div><div class="icl" style="left:1320px">스킨부스터</div>
+    </div>
+  </section>
+
+  <!-- S5 : care -->
+  <section id="s5">
+    <div id="s5L" class="abs" style="left:220px;top:392px"><span class="pill teal">주요 진료</span></div>
+    <div id="s5H" class="abs h2 split" style="left:220px;top:470px;white-space:nowrap;line-height:1.25">이런 분들을<br>함께 돌봅니다</div>
+    <div id="wheel">
+      <div class="wi">수술 후 재활</div><div class="wi">암환자 케어 · 면역치료</div><div class="wi">통증 치료</div>
+      <div class="wi">교통사고 치료</div><div class="wi">골절 환자 케어</div>
+    </div>
+    <div id="wbar"></div>
+  </section>
+
+  <!-- S6 : promise -->
+  <section id="s6">
+    <svg id="heart" class="abs" viewBox="0 0 120 120" style="left:890px;top:250px;width:140px;height:140px;overflow:visible">
+      <path d="M60 100S16 74 16 44a22 22 0 0 1 44-6 22 22 0 0 1 44 6c0 30-44 56-44 56z" pathLength="1" fill="none" stroke="#E0B54E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div id="s6aH" class="row h1 split" style="top:430px">불편함을, <span class="hl">먼저</span> 살핍니다</div>
+    <div id="s6aS" class="row sub split" style="top:590px">전 직원이 친절하게, 환자분의 불편함을 먼저 해결해 드리려 노력합니다</div>
+    <div id="s6bH" class="row h2 split" style="top:220px">통증부터 치료 계획까지, <span class="hl">알기 쉽게</span></div>
+    <svg id="line6" class="layer" viewBox="0 0 1920 1080"><path d="M460 520H1460" stroke="#357075" stroke-width="4" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+    <div class="node" style="left:460px">01</div><div class="node" style="left:960px">02</div><div class="node" style="left:1460px">03</div>
+    <div class="nt" style="left:460px"><b>통증의 원인</b><span>왜 아픈지</span></div>
+    <div class="nt" style="left:960px"><b>치료 방법</b><span>어떻게 치료하는지</span></div>
+    <div class="nt" style="left:1460px"><b>치료 계획</b><span>얼마나, 어떤 순서로</span></div>
+  </section>
+
+  <!-- S7 : everyday life -->
+  <section id="s7">
+    <div id="s7a" class="row split" style="top:170px;font-size:46px;font-weight:600;color:var(--sub)">치료 후, 다시</div>
+    <div id="s7b" class="row h1 split" style="top:236px">평범하고 <span class="hl">평화로운 일상</span>으로</div>
+    <div id="s7c" class="row sub split" style="top:392px">그 일상으로 돌아가실 때까지, 최선을 다하겠습니다</div>
+  </section>
+
+  <img id="logo" src="logo-full.png" alt="해빛한방병원">
+  <div id="info">
+    <div class="pills"><span class="pill teal">365일 진료</span><span class="pill line">평일 09:00 – 21:00</span><span class="pill line">토 · 일 · 공휴일 09:00 – 16:00</span></div>
+    <div id="tel">063-715-5119</div>
+    <div id="addr">전북특별자치도 전주시 덕진구 사근1길 10 현대메디컬시티 2층</div>
+  </div>
+
+  <div id="vignette" class="layer"></div>
+  <div id="grain" class="layer"></div>
+</div>
+</div>
+
+<div id="ctl">
+  <button id="pp" aria-label="재생/일시정지"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path id="ppi" d="M4 2h3v12H4zM9 2h3v12H9z"/></svg></button>
+  <input id="seek" type="range" min="0" max="40" step="0.01" value="0" aria-label="재생 위치">
+  <span id="time">0.0 / 40s</span>
+  <a id="dl" href="habit-365.mp4" download>MP4</a>
+</div>
+
+<script>
+(() => {
+const DUR = 40;
+const RENDER = /[?&]render/.test(location.search);
+if (RENDER) document.body.classList.add('render');
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const prog = (t, a, d) => d <= 0 ? (t >= a ? 1 : 0) : clamp((t - a) / d);
+const E = {
+  lin: x => x,
+  out3: x => 1 - Math.pow(1 - x, 3),
+  out5: x => 1 - Math.pow(1 - x, 5),
+  in3: x => x * x * x,
+  io3: x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
+  ioS: x => -(Math.cos(Math.PI * x) - 1) / 2,
+  back: x => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); },
+};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (a, b, t) => { const A = hex(a), B = hex(b); return `rgb(${A.map((v, i) => Math.round(lerp(v, B[i], t))).join(',')})`; };
+const mixK = (keys, x) => { // keys: [[x, c1, c2...]]
+  if (x <= keys[0][0]) return keys[0].slice(1);
+  for (let i = 1; i < keys.length; i++) if (x <= keys[i][0]) {
+    const p = E.ioS((x - keys[i - 1][0]) / (keys[i][0] - keys[i - 1][0]));
+    return keys[i].slice(1).map((c, j) => mix(keys[i - 1][j + 1], c, p));
+  }
+  return keys[keys.length - 1].slice(1);
+};
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+let rnd = 7; const rand = () => (rnd = (rnd * 16807) % 2147483647) / 2147483647;
+
+/* ---------- split text into chars ---------- */
+$$('.split').forEach(node => {
+  const chars = [];
+  const walk = n => [...n.childNodes].forEach(c => {
+    if (c.nodeType === 3) {
+      const f = document.createDocumentFragment();
+      for (const ch of c.textContent.replace(/\s+/g, ' ')) {
+        if (ch === ' ') { f.appendChild(document.createTextNode(' ')); continue; }
+        const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; f.appendChild(s); chars.push(s);
+      }
+      c.replaceWith(f);
+    } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
+  });
+  walk(node); node._ch = chars;
+});
+
+/* ---------- style helpers ---------- */
+const set = (e, { o = 1, x = 0, y = 0, s = 1, b = 0, r = 0 } = {}) => {
+  e.style.opacity = o;
+  e.style.transform = `translate(${x}px,${y}px) scale(${s})${r ? ` rotate(${r}deg)` : ''}`;
+  e.style.filter = b > .05 ? `blur(${b}px)` : 'none';
+};
+// in/out envelope for a block
+function blk(e, t, a, ad, z, zd, o = {}) {
+  const { y = 40, yo = -30, s0 = 1, so = 1, bl = 8, ease = E.out3, x = 0 } = o;
+  const pi = ease(prog(t, a, ad)), po = E.in3(prog(t, z, zd));
+  set(e, { o: pi * (1 - po), x: (1 - pi) * x, y: (1 - pi) * y + po * yo, s: lerp(s0, 1, pi) * lerp(1, so, po), b: (1 - pi) * bl + po * bl });
+}
+// per-char reveal + block out
+function txt(e, t, a, z, o = {}) {
+  const { st = .035, d = .75, y = 46, bl = 10, zd = .4, yo = -30 } = o;
+  e._ch.forEach((c, i) => {
+    const p = E.out3(prog(t, a + i * st, d));
+    c.style.opacity = p; c.style.transform = `translateY(${(1 - p) * y}px)`;
+    c.style.filter = p < .98 ? `blur(${(1 - p) * bl}px)` : 'none';
+  });
+  const po = E.in3(prog(t, z, zd));
+  e.style.opacity = 1 - po; e.style.transform = `translateY(${po * yo}px)`;
+  e.style.filter = po > .02 ? `blur(${po * 8}px)` : 'none';
+}
+const draw = (svg, p) => svg.querySelectorAll('[pathLength]').forEach(n => { n.style.strokeDasharray = 1; n.style.strokeDashoffset = 1 - p; });
+
+/* ---------- build generated SVG ---------- */
+// ring of 365 ticks
+const RC = { x: 960, y: 400, r: 240 };
+const ticks = [];
+for (let i = 0; i < 365; i++) {
+  const a = i / 365 * Math.PI * 2, major = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334].includes(i);
+  const r1 = major ? RC.r - 26 : RC.r - 14, r2 = RC.r + 6;
+  ticks.push(el('line', { x1: RC.x + Math.sin(a) * r1, y1: RC.y - Math.cos(a) * r1, x2: RC.x + Math.sin(a) * r2, y2: RC.y - Math.cos(a) * r2,
+    stroke: '#357075', 'stroke-width': major ? 4 : 2.4, 'stroke-linecap': 'round', opacity: .15 }, $('#ring')));
+}
+// stars
+const stars = [];
+for (let i = 0; i < 70; i++) stars.push({ e: el('circle', { cx: rand() * 1920, cy: rand() * 640, r: .8 + rand() * 2.2, fill: '#FFF6DE' }, $('#stars')), ph: rand() * 6.28, sp: 1.5 + rand() * 3 });
+// sun rays
+const rays = [];
+for (let i = 0; i < 24; i++) { const a = i / 24 * Math.PI * 2; rays.push(el('line', { x1: Math.cos(a) * 170, y1: Math.sin(a) * 170, x2: Math.cos(a) * (i % 2 ? 215 : 250), y2: Math.sin(a) * (i % 2 ? 215 : 250), stroke: '#EFCC70', 'stroke-width': 5, 'stroke-linecap': 'round' }, $('#rays'))); }
+// people figures (7 + 1)
+const figs = [];
+const FX = i => i < 7 ? 497 + i * 126 : 1423;
+for (let i = 0; i < 8; i++) {
+  const g = el('g', {}, $('#figs')), c = i < 7 ? '#357075' : '#D3A43A';
+  el('circle', { cx: 0, cy: -84, r: 23, fill: c }, g);
+  el('path', { d: 'M-38 0V-14Q-38-52 0-52Q38-52 38-14V0Z', fill: c }, g);
+  el('path', { d: 'M-12-52L0-34L12-52', fill: 'none', stroke: '#fff', 'stroke-width': 4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+  figs.push(g);
+}
+const br1 = el('path', { d: 'M447 446v10H1303v-10', fill: 'none', stroke: '#357075', 'stroke-width': 3, 'stroke-linecap': 'round', pathLength: 1 }, $('#figs'));
+const br2 = el('path', { d: 'M1373 446v10H1473v-10', fill: 'none', stroke: '#D3A43A', 'stroke-width': 3, 'stroke-linecap': 'round', pathLength: 1 }, $('#figs'));
+// birds
+const birds = [0, 1, 2].map(i => el('path', { fill: 'none', stroke: '#4A5A58', 'stroke-width': 3.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, $('#birds')));
+// grain texture
+$('#grain').style.backgroundImage = `url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.2 -.1"/></filter><rect width="300" height="300" filter="url(#n)"/></svg>')}")`;
+
+/* ---------- scene windows ---------- */
+const SCN = [['#s1', 0, 6.0], ['#s2', 5.8, 13.2], ['#s3', 13.0, 17.8], ['#s4', 17.6, 23.9], ['#s5', 23.6, 28.7], ['#s6', 28.4, 33.6], ['#s7', 33.4, 40.1]].map(([s, a, b]) => [$(s), a, b]);
+
+/* ---------- S2 clock helpers ---------- */
+const hourAt = t => 9 + 12 * E.ioS(prog(t, 6.4, 3.5));
+const arc = h => { const th = (160 - (h - 9) * 15.5) * Math.PI / 180; return { x: 960 + 860 * Math.cos(th), y: 980 - 800 * Math.sin(th) }; };
+const SKY_H = [[9, '#E1EEEA', '#F8F3E8'], [15, '#D3E7E2', '#F6F0E1'], [17.4, '#F2D5A9', '#F8E8D0'], [18.5, '#E7A57A', '#F4CDA3'], [19.6, '#3D4E62', '#B47E69'], [21, '#0E2629', '#1D4245']];
+const HILL_H = [[9, '#CBE0D7', '#B1CFC2'], [17.4, '#CEDCC8', '#B4CBB6'], [18.6, '#B98E7A', '#9A7262'], [21, '#18393C', '#0F2A2C']];
+const LOGO_SUN = { x: 570 + 103 * 780 / 900, y: 330 + 170 * 780 / 900, r: 34.5 * 780 / 900 };
+
+/* ---------- main render ---------- */
+function render(t) {
+  for (const [e, a, b] of SCN) e.style.display = t >= a && t < b ? 'block' : 'none';
+
+  // ---- sky ----
+  const h = hourAt(t);
+  let sky;
+  if (t < 5.6) sky = ['#F7F4EC', '#F7F4EC'];
+  else if (t < 6.4) { const p = E.ioS(prog(t, 5.6, .8)); sky = [mix('#F7F4EC', '#E1EEEA', p), mix('#F7F4EC', '#F8F3E8', p)]; }
+  else if (t < 13.5) sky = mixK(SKY_H, h);
+  else sky = mixK([[36.6, '#FAE6C6', '#FDF7EC'], [37.5, '#F7F4EC', '#F7F4EC']], t);
+  $('#sky').style.background = `linear-gradient(180deg,${sky[0]} 0%,${sky[1]} 100%)`;
+
+  // ---- night: stars & moon ----
+  const night = t > 6 && t < 13.5 ? clamp((h - 18.9) / 1.6) : 0;
+  $('#stars').style.display = night > 0 ? 'block' : 'none';
+  if (night > 0) stars.forEach((s, i) => s.e.setAttribute('opacity', night * clamp((t - 8.9 - (i % 10) * .06) * 2) * (.55 + .45 * Math.sin(t * s.sp + s.ph))));
+  const mp = E.out3(clamp((h - 18.6) / 2.2)) * (t < 13.5 ? 1 : 0);
+  $('#moon').style.opacity = mp; $('#moon').style.transform = `translate(${(1 - mp) * -60}px,${(1 - mp) * 90}px)`;
+
+  // ---- sun ----
+  let sx = 960, sy = 400, sr = 0, so = 1, glow = 1, ray = 0;
+  if (t < 2.6) { const p = E.out3(prog(t, .2, 1.6)); sr = 56 * p; sy = lerp(520, 400, p); so = p; }
+  else if (t < 3.0) { const p = E.io3(prog(t, 2.6, .4)); sr = lerp(56, 18, p); sy = lerp(400, RC.y - RC.r, p); }
+  else if (t < 5.6) { const a = E.io3(prog(t, 3.0, 1.6)) * Math.PI * 2; sx = RC.x + Math.sin(a) * RC.r; sy = RC.y - Math.cos(a) * RC.r; sr = 18; }
+  else if (t < 6.4) { const p = E.io3(prog(t, 5.6, .8)), A = arc(9); sx = lerp(960, A.x, p); sy = lerp(RC.y - RC.r, A.y, p); sr = lerp(18, 66, p); }
+  else if (t < 13.5) { const A = arc(h); sx = A.x; sy = A.y; sr = 66; so = h > 19.6 ? 0 : 1; }
+  else if (t < 33.8) so = 0;
+  else {
+    const p = E.out3(prog(t, 33.9, 2.2)); sx = 960; sy = lerp(1120, 745, p); sr = 120; ray = p;
+    const q = E.io3(prog(t, 36.7, 1.0));
+    sx = lerp(sx, LOGO_SUN.x, q); sy = lerp(sy, LOGO_SUN.y, q); sr = lerp(sr, LOGO_SUN.r, q); ray *= 1 - q; glow = 1 - q * .9;
+    so = 1 - prog(t, 38.0, .3);
+  }
+  const sun = $('#sun'); sun.style.transform = `translate(${sx}px,${sy}px)`; sun.style.opacity = so; sun.style.display = so > 0 ? 'block' : 'none';
+  const core = sun.querySelector('.core'), gl = sun.querySelector('.glow');
+  Object.assign(core.style, { width: 2 * sr + 'px', height: 2 * sr + 'px', left: -sr + 'px', top: -sr + 'px' });
+  const gr = sr * 3.4; Object.assign(gl.style, { width: 2 * gr + 'px', height: 2 * gr + 'px', left: -gr + 'px', top: -gr + 'px', opacity: glow });
+  const rs = $('#rays'); rs.style.opacity = ray * .55; rs.style.transform = `rotate(${t * 6}deg) scale(${.85 + .15 * ray})`;
+
+  // ---- hills ----
+  let hy = 420, hc = ['#CBE0D7', '#B1CFC2'];
+  if (t < 13.5) { hy = lerp(420, 0, E.out3(prog(t, 5.7, 1.0))); hc = mixK(HILL_H, h); }
+  else { hy = lerp(420, 0, E.out3(prog(t, 33.5, 1.2))) + lerp(0, 440, E.in3(prog(t, 36.6, .9))); hc = ['#D5E6DC', '#BCD7CA']; }
+  $('#hills').style.transform = `translateY(${hy}px)`;
+  $('#hillB').setAttribute('fill', hc[0]); $('#hillF').setAttribute('fill', hc[1]);
+
+  // ---- iris (ivory cover for S3–S6) ----
+  const ir = $('#iris');
+  if (t < 12.6) { ir.style.display = 'none'; $('#irisRing').style.display = 'none'; }
+  else {
+    ir.style.display = 'block';
+    const R = E.io3(prog(t, 12.6, .9)) * 1150;
+    ir.style.clipPath = t < 20 ? `circle(${R}px at 960px 540px)` : `inset(0 0 ${E.io3(prog(t, 33.2, 1.0)) * 1080}px 0)`;
+    const rg = $('#irisRing'), ro = t < 13.6 ? Math.sin(Math.PI * prog(t, 12.6, .9)) : 0;
+    rg.style.display = ro > 0 ? 'block' : 'none';
+    Object.assign(rg.style, { width: 2 * R + 'px', height: 2 * R + 'px', margin: `${-R - 4}px 0 0 ${-R - 4}px`, opacity: ro });
+  }
+  blk($('#mark'), t, 13.3, .6, 33.0, .4, { y: -10 });
+
+  // ---- S1 ----
+  if (t < 6.1) {
+    txt($('#hook'), t, .7, 2.4);
+    const op = E.io3(prog(t, 3.0, 1.6));
+    const ringIn = E.out3(prog(t, 2.5, .6)), ringOut = E.in3(prog(t, 5.4, .5));
+    ticks.forEach((k, i) => {
+      const f = i / 365, lit = f <= op && op > 0, fresh = lit && op - f < .05 && op < 1;
+      k.setAttribute('opacity', (lit ? 1 : .16) * ringIn);
+      k.setAttribute('stroke', fresh ? '#E5B84F' : '#357075');
+    });
+    $('#ring').style.opacity = 1 - ringOut; $('#ring').style.transformOrigin = '960px 400px'; $('#ring').style.transform = `scale(${1 + ringOut * .08})`;
+    $('#num').textContent = Math.round(365 * op);
+    blk($('#count'), t, 2.9, .6, 5.4, .45, { y: 0, s0: .85, yo: -20 });
+    $('#count').style.transform += ' translate(-50%,-50%)';
+    $('#count').style.transformOrigin = '0 0';
+    txt($('#s1sub'), t, 4.4, 5.4, { st: .03 });
+    $$('#days .day').forEach((d, i) => blk(d, t, 4.75 + i * .06, .55, 5.4 + i * .02, .4, { y: 30, s0: .5, ease: E.back }));
+  }
+
+  // ---- S2 ----
+  if (t > 5.7 && t < 13.3) {
+    blk($('#clockWrap'), t, 6.0, .7, 9.95, .45, { y: 40, yo: -50 });
+    const hh = Math.floor(h), mm = Math.floor((h - hh) * 60 + 1e-6);
+    $('#clock').textContent = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+    const ink = mix('#2B3336', '#FFFFFF', clamp((h - 18.6) / 1.6));
+    $('#clock').style.color = ink; $('#clkLabel').style.color = ink;
+    const f = (h - 9) / 12;
+    $('#bar .fill').style.width = f * 100 + '%'; $('#bar .dot').style.left = f * 100 + '%';
+    $('#bar .track').style.background = `rgba(${night > .5 ? '255,255,255' : '43,51,54'},.18)`;
+    if (!$('#bar .lb')) [9, 12, 15, 18, 21].forEach((v, i) => { const d = document.createElement('div'); d.className = 'lb'; d.style.left = i * 25 + '%'; d.textContent = String(v).padStart(2, '0') + ':00'; $('#bar').appendChild(d); });
+    $$('#bar .lb').forEach((d, i) => { d.style.color = i === 4 && h > 20.5 ? '#EFCC70' : ink; d.style.opacity = i === 4 ? 1 : .7; });
+    blk($('#nightPill'), t, 10.0, .5, 12.5, .4, { y: 20, s0: .7, ease: E.back });
+    txt($('#s2h'), t, 10.15, 12.5, { st: .04 });
+    blk($('#c1'), t, 10.75, .7, 12.5, .4, { y: 60 });
+    blk($('#c2'), t, 10.9, .7, 12.55, .4, { y: 60 });
+    txt($('#s2cap'), t, 11.4, 12.55, { st: .02, y: 24 });
+  }
+
+  // ---- S3 ----
+  if (t > 12.9 && t < 17.9) {
+    txt($('#s3h'), t, 13.35, 17.2, { st: .03 });
+    const out = E.in3(prog(t, 17.15, .45));
+    figs.forEach((g, i) => {
+      const p = E.back(prog(t, 13.7 + i * .085 + (i === 7 ? .2 : 0), .55));
+      g.setAttribute('transform', `translate(${FX(i)},${442 + (1 - p) * 40 - out * 40}) scale(${Math.max(0, .4 + .6 * p)})`);
+      g.setAttribute('opacity', clamp(p * 1.5) * (1 - out));
+    });
+    br1.style.strokeDasharray = 1; br1.style.strokeDashoffset = 1 - E.io3(prog(t, 14.45, .6));
+    br2.style.strokeDasharray = 1; br2.style.strokeDashoffset = 1 - E.io3(prog(t, 14.75, .4));
+    br1.setAttribute('opacity', 1 - out); br2.setAttribute('opacity', 1 - out);
+    blk($('#fl1'), t, 14.7, .5, 17.15, .4, { y: 20 }); $('#fl1').style.transform += ' translateX(-50%)';
+    blk($('#fl2'), t, 14.95, .5, 17.2, .4, { y: 20 }); $('#fl2').style.transform += ' translateX(-50%)';
+    $('#n7').textContent = Math.round(7 * E.out3(prog(t, 14.7, .7)));
+    $('#n1').textContent = Math.round(E.out3(prog(t, 14.95, .3)));
+    blk($('#ip1'), t, 15.55, .6, 17.2, .4, { y: 40, s0: .9 });
+    blk($('#ip2'), t, 15.7, .6, 17.25, .4, { y: 40, s0: .9 });
+    txt($('#s3cap'), t, 15.95, 17.25, { st: .018, y: 24 });
+  }
+
+  // ---- S4 ----
+  if (t > 17.5 && t < 24) {
+    blk($('#s4aL'), t, 17.85, .5, 20.6, .35, { y: 20, s0: .8, ease: E.back });
+    txt($('#s4aH'), t, 17.95, 20.6, { st: .05 });
+    const A = $$('#s4a .ic'), AL = $$('#s4a .icl');
+    A.forEach((c, i) => { blk(c, t, 18.35 + i * .17, .6, 20.55 + i * .04, .4, { y: 60, s0: .6, ease: E.back }); draw(c, E.io3(prog(t, 18.55 + i * .17, 1.0))); });
+    AL.forEach((c, i) => { blk(c, t, 18.75 + i * .17, .5, 20.6 + i * .04, .35, { y: 24 }); c.style.transform += ' translateX(-50%)'; });
+    blk($('#s4bL'), t, 21.0, .5, 23.35, .35, { y: 20, s0: .8, ease: E.back });
+    txt($('#s4bH'), t, 21.1, 23.35, { st: .035 });
+    const B = $$('#s4b .ic'), BL = $$('#s4b .icl');
+    B.forEach((c, i) => { blk(c, t, 21.5 + i * .18, .6, 23.3 + i * .04, .4, { y: 60, s0: .6, ease: E.back }); draw(c, E.io3(prog(t, 21.7 + i * .18, 1.0))); });
+    BL.forEach((c, i) => { blk(c, t, 21.9 + i * .18, .5, 23.35 + i * .04, .35, { y: 24 }); c.style.transform += ' translateX(-50%)'; });
+  }
+
+  // ---- S5 ----
+  if (t > 23.5 && t < 28.8) {
+    blk($('#s5L'), t, 23.85, .5, 28.2, .4, { x: -30, y: 0, ease: E.back, s0: .8 });
+    txt($('#s5H'), t, 23.95, 28.2, { st: .04 });
+    let pos = 0; for (let k = 0; k < 4; k++) pos += E.io3(prog(t, 24.95 + k * .78, .5));
+    const win = E.out3(prog(t, 24.15, .7)), wout = E.in3(prog(t, 28.2, .45));
+    $$('#wheel .wi').forEach((w, i) => {
+      const d = i - pos, ad = Math.min(Math.abs(d), 2.6);
+      const y = 540 + d * 128 - 52, s = 1 - Math.min(ad, 2) * .3;
+      w.style.transform = `translate(${(1 - win) * 80}px,${y}px) scale(${s})`;
+      w.style.opacity = clamp(1 - ad * .42) * win * (1 - wout);
+      w.style.color = mix('#244F53', '#9AA6A1', clamp(ad));
+      w.style.filter = ad > .4 ? `blur(${Math.min(ad - .4, 1.4) * 1.6}px)` : 'none';
+    });
+    const wb = $('#wbar'); wb.style.opacity = win * (1 - wout); wb.style.transform = `scaleY(${.4 + .6 * win + .12 * Math.sin(pos * Math.PI)})`;
+  }
+
+  // ---- S6 ----
+  if (t > 28.3 && t < 33.7) {
+    const hp = E.io3(prog(t, 28.65, 1.0)), ho = E.in3(prog(t, 30.65, .4));
+    draw($('#heart'), hp); const hs = $('#heart'); hs.style.opacity = (hp > 0 ? 1 : 0) * (1 - ho);
+    hs.style.transform = `scale(${1 + .06 * Math.sin(Math.max(0, t - 29.6) * 5) * (t > 29.6 ? 1 : 0)}) translateY(${-ho * 30}px)`;
+    txt($('#s6aH'), t, 28.85, 30.65, { st: .045 });
+    txt($('#s6aS'), t, 29.45, 30.7, { st: .015, y: 24 });
+    txt($('#s6bH'), t, 31.0, 33.0, { st: .035 });
+    const lp = E.io3(prog(t, 31.55, 1.3)), lo = E.in3(prog(t, 33.0, .4));
+    const ln = $('#line6 path'); ln.style.strokeDashoffset = 1 - lp; $('#line6').style.opacity = 1 - lo;
+    $$('#s6 .node').forEach((n, i) => { blk(n, t, 31.45 + i * .62, .55, 33.0 + i * .03, .4, { y: 0, s0: .3, ease: E.back }); });
+    $$('#s6 .nt').forEach((n, i) => { blk(n, t, 31.7 + i * .62, .55, 33.02 + i * .03, .4, { y: 30 }); n.style.transform += ' translateX(-50%)'; });
+  }
+
+  // ---- S7 ----
+  if (t > 33.3) {
+    txt($('#s7a'), t, 34.35, 36.55, { st: .05 });
+    txt($('#s7b'), t, 34.7, 36.6, { st: .045 });
+    txt($('#s7c'), t, 35.45, 36.65, { st: .02, y: 24 });
+    const bv = t > 34 && t < 37.2; $('#birds').style.display = bv ? 'block' : 'none';
+    if (bv) birds.forEach((b, i) => {
+      const p = prog(t, 34.1 + i * .25, 3.0), x = lerp(1240 + i * 70, 1700 + i * 60, p), y = lerp(640 - i * 40, 520 - i * 50, p);
+      const f = Math.sin(t * 9 + i * 1.7) * 7, w = 15 - i * 2;
+      b.setAttribute('d', `M${x - w} ${y - f}Q${x - w / 2} ${y - 6} ${x} ${y}Q${x + w / 2} ${y - 6} ${x + w} ${y - f}`);
+      b.setAttribute('opacity', clamp(p * 4) * (1 - prog(t, 36.6, .4)));
+    });
+  } else $('#birds').style.display = 'none';
+
+  // ---- logo & info ----
+  const lg = $('#logo');
+  if (t > 37.2) {
+    lg.style.display = 'block';
+    lg.style.opacity = E.out3(prog(t, 37.35, .4));
+    lg.style.clipPath = `inset(-2% ${lerp(77, 0, E.io3(prog(t, 37.6, .75)))}% -2% 0)`;
+  } else lg.style.display = 'none';
+  const inf = $('#info');
+  if (t > 38) {
+    inf.style.display = 'block';
+    $$('#info .pill').forEach((p, i) => blk(p, t, 38.15 + i * .1, .5, 99, 1, { y: 24, s0: .85, ease: E.back }));
+    blk($('#tel'), t, 38.45, .55, 99, 1, { y: 26 });
+    blk($('#addr'), t, 38.6, .55, 99, 1, { y: 20 });
+  } else inf.style.display = 'none';
+
+  // ---- grain ----
+  const fr = Math.floor(t * 24);
+  $('#grain').style.backgroundPosition = `${(fr * 73) % 300}px ${(fr * 151) % 300}px`;
+}
+
+/* ---------- playback ---------- */
+let cur = 0, playing = !RENDER, last = 0;
+const stage = $('#stage');
+function fit() {
+  if (RENDER) return;
+  const s = Math.min(innerWidth / 1920, (innerHeight - 70) / 1080);
+  stage.style.transform = `scale(${s})`; stage.style.margin = `${-(1080 * (1 - s)) / 2 - 30}px ${-(1920 * (1 - s)) / 2}px`;
+}
+addEventListener('resize', fit); fit();
+const seek = $('#seek'), timeL = $('#time'), ppi = $('#ppi');
+const icon = () => ppi.setAttribute('d', playing ? 'M4 2h3v12H4zM9 2h3v12H9z' : 'M4 2l10 6-10 6z');
+function tick(now) {
+  if (playing) { cur += (now - last) / 1000; if (cur >= DUR) cur = 0; }
+  last = now;
+  render(cur); seek.value = cur; timeL.textContent = `${cur.toFixed(1)} / ${DUR}s`;
+  requestAnimationFrame(tick);
+}
+$('#pp').onclick = () => { playing = !playing; icon(); };
+seek.oninput = () => { cur = +seek.value; };
+addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); playing = !playing; icon(); } });
+icon();
+
+window.__seek = t => render(t);
+window.__ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.decode().catch(() => {}))));
+if (!RENDER) window.__ready.then(() => { last = performance.now(); requestAnimationFrame(tick); });
+else render(0);
+})();
+</script>
+</body>
+</html>
