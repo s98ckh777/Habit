@@ -274,6 +274,8 @@ body.render #ctl{display:none}
 
 <div id="ctl">
   <button id="pp" aria-label="재생/일시정지"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path id="ppi" d="M4 2h3v12H4zM9 2h3v12H9z"/></svg></button>
+  <button id="snd" aria-label="배경음악 켜기/끄기" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7v4h3l4 3.5v-11L5.5 7z" fill="currentColor"/><path class="on" d="M12 6.2a4 4 0 0 1 0 5.6M14.2 4a7 7 0 0 1 0 10"/><path class="off" d="M12.5 7l4 4M16.5 7l-4 4"/></svg></button>
+  <audio id="bgm" src="music.m4a" preload="auto"></audio>
   <input id="seek" type="range" min="0" max="40" step="0.01" value="0" aria-label="재생 위치">
   <span id="time">0.0 / 40s</span>
   <a id="dl" href="habit-365.mp4" download>MP4</a>
@@ -387,7 +389,7 @@ const birds = [0, 1, 2].map(i => el('path', { fill: 'none', stroke: '#4A5A58', '
 $('#grain').style.backgroundImage = `url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.2 -.1"/></filter><rect width="300" height="300" filter="url(#n)"/></svg>')}")`;
 
 /* ---------- scene windows ---------- */
-const SCN = [['#s1', 0, 6.0], ['#s2', 5.8, 13.2], ['#s3', 13.0, 17.8], ['#s4', 17.6, 23.9], ['#s5', 23.6, 28.7], ['#s6', 28.4, 33.6], ['#s7', 33.4, 40.1]].map(([s, a, b]) => [$(s), a, b]);
+const SCN = [['#s1', 0, 6.0], ['#s2', 5.8, 13.2], ['#s3', 13.0, 17.8], ['#s4', 17.6, 28.6], ['#s5', 20.6, 25.8], ['#s6', 28.4, 33.6], ['#s7', 33.4, 40.1]].map(([s, a, b]) => [$(s), a, b]);
 
 /* ---------- S2 clock helpers ---------- */
 const hourAt = t => 9 + 12 * E.ioS(prog(t, 6.4, 3.5));
@@ -516,25 +518,27 @@ function render(t) {
   }
 
   // ---- S4 ----
-  if (t > 17.5 && t < 24) {
+  if (t > 17.5 && t < 28.6) {
     blk($('#s4aL'), t, 17.85, .5, 20.6, .35, { y: 20, s0: .8, ease: E.back });
     txt($('#s4aH'), t, 17.95, 20.6, { st: .05 });
     const A = $$('#s4a .ic'), AL = $$('#s4a .icl');
     A.forEach((c, i) => { blk(c, t, 18.35 + i * .17, .6, 20.55 + i * .04, .4, { y: 60, s0: .6, ease: E.back }); draw(c, E.io3(prog(t, 18.55 + i * .17, 1.0))); });
     AL.forEach((c, i) => { blk(c, t, 18.75 + i * .17, .5, 20.6 + i * .04, .35, { y: 24 }); c.style.transform += ' translateX(-50%)'; });
-    blk($('#s4bL'), t, 21.0, .5, 23.35, .35, { y: 20, s0: .8, ease: E.back });
-    txt($('#s4bH'), t, 21.1, 23.35, { st: .035 });
+    const v = t - 4.7;
+    blk($('#s4bL'), v, 21.0, .5, 23.35, .35, { y: 20, s0: .8, ease: E.back });
+    txt($('#s4bH'), v, 21.1, 23.35, { st: .035 });
     const B = $$('#s4b .ic'), BL = $$('#s4b .icl');
-    B.forEach((c, i) => { blk(c, t, 21.5 + i * .18, .6, 23.3 + i * .04, .4, { y: 60, s0: .6, ease: E.back }); draw(c, E.io3(prog(t, 21.7 + i * .18, 1.0))); });
-    BL.forEach((c, i) => { blk(c, t, 21.9 + i * .18, .5, 23.35 + i * .04, .35, { y: 24 }); c.style.transform += ' translateX(-50%)'; });
+    B.forEach((c, i) => { blk(c, v, 21.5 + i * .18, .6, 23.3 + i * .04, .4, { y: 60, s0: .6, ease: E.back }); draw(c, E.io3(prog(v, 21.7 + i * .18, 1.0))); });
+    BL.forEach((c, i) => { blk(c, v, 21.9 + i * .18, .5, 23.35 + i * .04, .35, { y: 24 }); c.style.transform += ' translateX(-50%)'; });
   }
 
   // ---- S5 ----
-  if (t > 23.5 && t < 28.8) {
-    blk($('#s5L'), t, 23.85, .5, 28.2, .4, { x: -30, y: 0, ease: E.back, s0: .8 });
-    txt($('#s5H'), t, 23.95, 28.2, { st: .04 });
-    let pos = 0; for (let k = 0; k < 4; k++) pos += E.io3(prog(t, 24.95 + k * .78, .5));
-    const win = E.out3(prog(t, 24.15, .7)), wout = E.in3(prog(t, 28.2, .45));
+  if (t > 20.6 && t < 25.8) {
+    const u = t + 3; // care areas now play right after the herbal-medicine part
+    blk($('#s5L'), u, 23.85, .5, 28.2, .4, { x: -30, y: 0, ease: E.back, s0: .8 });
+    txt($('#s5H'), u, 23.95, 28.2, { st: .04 });
+    let pos = 0; for (let k = 0; k < 4; k++) pos += E.io3(prog(u, 24.95 + k * .78, .5));
+    const win = E.out3(prog(u, 24.15, .7)), wout = E.in3(prog(u, 28.2, .45));
     $$('#wheel .wi').forEach((w, i) => {
       const d = i - pos, ad = Math.min(Math.abs(d), 2.6);
       const y = 540 + d * 128 - 52, s = 1 - Math.min(ad, 2) * .3;
@@ -605,16 +609,31 @@ function fit() {
 addEventListener('resize', fit); fit();
 const seek = $('#seek'), timeL = $('#time'), ppi = $('#ppi');
 const icon = () => ppi.setAttribute('d', playing ? 'M4 2h3v12H4zM9 2h3v12H9z' : 'M4 2l10 6-10 6z');
+// background music: off until the viewer turns it on (browsers block sound before a click)
+const bgm = $('#bgm'), snd = $('#snd');
+let soundOn = false;
+const syncAudio = () => {
+  if (!bgm) return;
+  if (soundOn && playing) { if (Math.abs(bgm.currentTime - cur) > .08) bgm.currentTime = cur; bgm.play().catch(() => {}); }
+  else bgm.pause();
+};
+const sndIcon = () => { snd.setAttribute('aria-pressed', soundOn); snd.querySelector('.on').style.display = soundOn ? '' : 'none'; snd.querySelector('.off').style.display = soundOn ? 'none' : ''; };
 function tick(now) {
-  if (playing) { cur += (now - last) / 1000; if (cur >= DUR) cur = 0; }
+  if (playing) {
+    if (soundOn && bgm && !bgm.paused && bgm.currentTime < DUR - .05) cur = bgm.currentTime;
+    else cur += (now - last) / 1000;
+    if (cur >= DUR) { cur = 0; syncAudio(); }
+  }
   last = now;
   render(cur); seek.value = cur; timeL.textContent = `${cur.toFixed(1)} / ${DUR}s`;
   requestAnimationFrame(tick);
 }
-$('#pp').onclick = () => { playing = !playing; icon(); };
-seek.oninput = () => { cur = +seek.value; };
-addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); playing = !playing; icon(); } });
-icon();
+const toggle = () => { playing = !playing; icon(); syncAudio(); };
+$('#pp').onclick = toggle;
+snd.onclick = () => { soundOn = !soundOn; sndIcon(); syncAudio(); };
+seek.oninput = () => { cur = +seek.value; syncAudio(); };
+addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); toggle(); } });
+icon(); sndIcon();
 
 window.__seek = t => render(t);
 window.__ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.decode().catch(() => {}))));

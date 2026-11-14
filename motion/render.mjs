@@ -1,8 +1,9 @@
 // Renders index.html → MP4 frame by frame.
-// Usage: node render.mjs [--fps 30] [--out habit-365.mp4] [--stills 1,5.5,12]
+// Usage: node render.mjs [--fps 30] [--out habit-365.mp4] [--stills 1,5.5,12] [--no-audio] [--mux silent.mp4]
+// If music.wav exists (python3 music.py) it is normalised and added as the soundtrack.
 // Needs Playwright (Chromium) and ffmpeg.
 import { createRequire } from 'node:module';
-import { mkdirSync, rmSync, existsSync } from 'node:fs';
+import { mkdirSync, rmSync, existsSync, renameSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
@@ -14,6 +15,13 @@ const dir = path.dirname(fileURLToPath(import.meta.url));
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d; };
 const FPS = +arg('fps', 30), DUR = 40, OUT = path.resolve(dir, arg('out', 'habit-365.mp4'));
 const stills = arg('stills');
+const AUDIO = path.join(dir, 'music.wav'), M4A = path.join(dir, 'music.m4a');
+// music.wav (from music.py) -> loudness-normalised music.m4a, then muxed into the video
+function mux(video, out) {
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', AUDIO, '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-ar', '48000', '-c:a', 'aac', '-b:a', '192k', M4A], { stdio: 'inherit' });
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', video, '-i', M4A, '-map', '0:v', '-map', '1:a', '-c', 'copy', '-shortest', '-movflags', '+faststart', out], { stdio: 'inherit' });
+}
+if (arg('mux')) { mux(path.resolve(dir, arg('mux')), OUT); console.log('muxed →', OUT); process.exit(0); }
 const url = pathToFileURL(path.join(dir, 'index.html')).href + '?render';
 const tmp = arg('tmp', path.join(os.tmpdir(), 'habit-frames'));
 
@@ -49,4 +57,8 @@ await browser.close();
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(tmp, 'f%05d.png'),
   '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', OUT], { stdio: 'inherit' });
 rmSync(tmp, { recursive: true, force: true });
+if (existsSync(AUDIO) && !process.argv.includes('--no-audio')) {
+  const silent = OUT.replace(/\.mp4$/, '.silent.mp4');
+  renameSync(OUT, silent); mux(silent, OUT); rmSync(silent);
+}
 console.log('done →', OUT, existsSync(OUT) ? '' : '(missing!)');
