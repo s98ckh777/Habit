@@ -489,3 +489,4 @@
   .sh-col::before{background:linear-gradient(180deg,color-mix(in srgb,var(--ivory) 80%,transparent) 0%,transparent calc(var(--hd-h) + 20px)), linear-gradient(0deg,color-mix(in srgb,var(--ivory) 96%,transparent) 0%,color-mix(in srgb,var(--ivory) 88%,transparent) 50%,color-mix(in srgb,var(--ivory) 40%,transparent) 85%);}
   .sh-col .sh-in{padding-bottom:28px;}
 }
+.cv.cv2{background:linear-gradient(165deg,var(--ivory-2) 0%,color-mix(in srgb,var(--soft) 70%,var(--ivory)) 100%);}
